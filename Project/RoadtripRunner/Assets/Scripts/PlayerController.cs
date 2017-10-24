@@ -21,36 +21,19 @@ public class PlayerController : MonoBehaviour {
 
 	//maybe swap back to char cont. for const. movement
 	void FixedUpdate() {
-		//constant  +x movement clamped to maxSpeed
-		//m_rigidbody.velocity = new Vector3(m_speed, m_jumpSpeed.y, 0);
-		//m_rigidbody.velocity = new Vector3 (Mathf.Clamp(m_rigidbody.velocity.x, m_speed, m_maxSpeed), 0, 0);
 
-		//take 2
+		m_rigidbody.AddForce(m_speed, 0, 0);
 
-
-
-		//clamping only x value
-		//Vector3 localVelocity = transform.InverseTransformPoint(m_rigidbody.velocity);
-		//localVelocity.x = Mathf.Clamp(m_rigidbody.velocity.x * Time.deltaTime, m_speed, m_maxSpeed);
-		//m_rigidbody.velocity = transform.TransformPoint(localVelocity);
+		if(m_rigidbody.velocity.magnitude >= m_maxSpeed) {
+			m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, m_maxSpeed);
+		}
 
 		//jump if space pressed And currently grounded
 		if(Input.GetButtonDown("Jump") && isJumping == false) {
-			Debug.Log("WEEEE");
-			m_rigidbody.AddForce(new Vector3(0, m_jumpSpeed.y, 0), ForceMode.Impulse);
+			//Debug.Log("WEEEE");
+			m_rigidbody.AddForce(m_jumpSpeed, ForceMode.Impulse);
 			//m_rigidbody.velocity += new Vector3(0, m_jumpSpeed * Time.deltaTime, 0);
 		}
-
-		m_rigidbody.velocity *= Time.deltaTime;
-
-		if(m_rigidbody.velocity.x >= m_maxSpeed) {
-			m_rigidbody.velocity = new Vector3(m_maxSpeed, m_rigidbody.velocity.y, m_rigidbody.velocity.z);
-		} else {
-			m_rigidbody.velocity += new Vector3(m_speed, 0, 0);
-		}
-
-		//m_rigidbody.AddForce(m_rigidbody.velocity);
-
 
 
 		//delete later, for testing purposes

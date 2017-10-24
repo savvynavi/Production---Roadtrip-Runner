@@ -23,7 +23,7 @@ public class Respawn : MonoBehaviour
 
     void Update()
     {
-        Plane TestPlane = new Plane(new Vector3(0, 1, 0), GameObject.FindGameObjectWithTag(PlaneTag).transform.position;
+        Plane TestPlane = new Plane(new Vector3(0, 1, 0), GameObject.FindGameObjectWithTag(PlaneTag).transform.position);
 
         if (TestPlane.GetSide(Player.transform.position) == false && ActiveCheckpoint == true)
             Player.transform.position = gameObject.transform.position;
