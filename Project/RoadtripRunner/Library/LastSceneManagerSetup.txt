@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/Respawn Example Scene.unity
-  isLoaded: 1
-  isActive: 1
