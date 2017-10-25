@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour {
 
 	private Rigidbody m_rigidbody;
 	private bool isJumping;
+	private bool m_upgradeFlight;
+	private float m_upgrateTimer;
 
 	public float m_speed = 0;
 	public float m_maxSpeed;
@@ -17,25 +19,22 @@ public class PlayerController : MonoBehaviour {
 	void Start() {
 		m_rigidbody = GetComponent<Rigidbody>();
 		isJumping = false;
+		m_upgradeFlight = false;
+		m_upgrateTimer = 0;
 	}
 
 	//maybe swap back to char cont. for const. movement
 	void FixedUpdate() {
-
+		//adding speed to players force, then clamping it to be less than 20
 		m_rigidbody.AddForce(m_speed, 0, 0);
-
 		if(m_rigidbody.velocity.magnitude >= m_maxSpeed) {
 			m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, m_maxSpeed);
 		}
 
 		//jump if space pressed And currently grounded
 		if(Input.GetButtonDown("Jump") && isJumping == false) {
-			//Debug.Log("WEEEE");
 			m_rigidbody.AddForce(m_jumpSpeed, ForceMode.Impulse);
-			//m_rigidbody.velocity += new Vector3(0, m_jumpSpeed * Time.deltaTime, 0);
 		}
-
-
 		//delete later, for testing purposes
 		TestVelocity = m_rigidbody.velocity;
 	}
@@ -47,5 +46,13 @@ public class PlayerController : MonoBehaviour {
 
 	void OnCollisionExit(Collision hit) {
 		isJumping = true;
+	}
+
+	//cheaper than destroy, but doesn't remove obj only turns rendering off, just add a pool and return it to it? 
+	void OnTriggerEnter(Collider hit) {
+		if(hit.tag == "PowerupFlying") {
+			hit.GetComponent<Renderer>().enabled = false;
+
+		}
 	}
 }
