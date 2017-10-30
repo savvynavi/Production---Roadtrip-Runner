@@ -9,6 +9,7 @@ TagManager:
   - player
   - PowerupSpeedBoost
   - PowerupFlying
+  - Collectable
   layers:
   - Default
   - TransparentFX
