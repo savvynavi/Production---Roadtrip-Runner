@@ -7,8 +7,6 @@ TagManager:
   - KillFloor
   - CollectableSpawner
   - player
-  - PowerupSpeedBoost
-  - PowerupFlying
   - Collectable
   layers:
   - Default

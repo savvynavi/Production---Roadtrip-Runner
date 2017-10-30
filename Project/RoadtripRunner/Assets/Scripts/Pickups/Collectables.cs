@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class scriptCollectible : MonoBehaviour {
+public class Collectables : MonoBehaviour {
+
 	public Text m_scorePrint;
 
 	public PlayerController m_player;
 
 	// Use this for initialization
-	void Start () {
+	void Start() {
 		m_player = m_player.GetComponent<PlayerController>();
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
+	void Update() {
 		ScoreUpdate();
 	}
 
+	//on trigger with player, will incriment score and then destroy this object
 	void OnTriggerEnter(Collider hit) {
-		if(hit.tag == "player"){
+		if(hit.tag == "player") {
 			m_player.m_score += 10;
 			ScoreUpdate();
 			Destroy(this.gameObject);

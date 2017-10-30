@@ -10,10 +10,13 @@ public class PlayerController : MonoBehaviour {
 	private bool isJumping;
 
 
+	//upgrade properties
 	public bool FlightUpgrade { get; set; }
+	public bool JumpUpgrade { get; set; }
+	public bool SpeedUpgrade { get; set; }
 	public float Timer { get; set; }
-	public int m_score;
 
+	public int m_score;
 	public float m_speed = 0;
 	public float m_maxSpeed;
 	public Vector3 m_jumpSpeed;
@@ -24,16 +27,42 @@ public class PlayerController : MonoBehaviour {
 		m_rigidbody = GetComponent<Rigidbody>();
 		isJumping = false;
 		FlightUpgrade = false;
+		JumpUpgrade = false;
+		SpeedUpgrade = false;
 		Timer = 0;
 
 	}
 
 	void Update() {
+		//checks if flight upgrade currently active, if so ticks down active time
 		if(FlightUpgrade == true) {
 			if(Timer >= 0) {
+				//seperate out into fn call?
 				Timer -= Time.deltaTime;
 			}else {
 				FlightUpgrade = false;
+			}
+		}
+
+		//checks if jump upgrade active, same as above(EDIT OUT MAGIC NUMBERS)
+		if(JumpUpgrade == true) {
+			if(Timer >= 0 == true) {
+				Timer -= Time.deltaTime;
+				m_jumpSpeed = new Vector3(2, 12, 0);
+			}else {
+				JumpUpgrade = false;
+				m_jumpSpeed = new Vector3(0, 7, 0);
+			}
+		}
+
+		//checks if speed upgrade active, same as above(MAGIC NUMBERS ARE BAD NEVER DO THIS CHANGE AFTER TESTING :y)
+		if(SpeedUpgrade == true) {
+			if(Timer >= 0 == true) {
+				Timer -= Time.deltaTime;
+				m_maxSpeed = 30;
+			}else{
+				SpeedUpgrade = false;
+				m_maxSpeed = 20;
 			}
 		}
 	}
@@ -46,7 +75,7 @@ public class PlayerController : MonoBehaviour {
 			m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, m_maxSpeed);
 		}
 		
-		//jump if space pressed And currently grounded
+		//jump if space pressed And currently grounded/flight mode activated
 		if(Input.GetButtonDown("Jump") && (isJumping == false || FlightUpgrade == true)) {
 			m_rigidbody.AddForce(m_jumpSpeed, ForceMode.Impulse);
 		}
@@ -54,7 +83,7 @@ public class PlayerController : MonoBehaviour {
 		TestVelocity = m_rigidbody.velocity;
 	}
 
-	//not currently using isGrounded due to no fast/easy way to add gravity while also allowing jumping
+	//not currently using isGrounded due to no fast/easy way to add gravity while also allowing jumping(maybe change to raycasting to prevent sticking to sides)
 	void OnCollisionEnter(Collision hit) {
 		isJumping = false;
 	}

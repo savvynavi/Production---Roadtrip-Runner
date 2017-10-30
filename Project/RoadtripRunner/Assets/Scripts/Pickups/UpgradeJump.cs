@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradeFlight : MonoBehaviour {
+public class UpgradeJump : MonoBehaviour {
 
 	public PlayerController m_player;
 	public float m_timer;
 
 	// Use this for initialization
-	void Start() {
+	void Start () {
 		m_player.GetComponent<PlayerController>();
 	}
-
-	//on trigger, sets player flight check to true and gives it it's active time, then destroys this object
+	
+	//on trigger with player, sets players jumpUpgrade to true and feeds it its active time
 	void OnTriggerEnter(Collider hit) {
 		if(hit.tag == "player") {
-			m_player.FlightUpgrade = true;
+			m_player.JumpUpgrade = true;
 			m_player.Timer = m_timer;
 			Destroy(this.gameObject);
 		}
