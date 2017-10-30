@@ -6,6 +6,9 @@ TagManager:
   tags:
   - KillFloor
   - CollectableSpawner
+  - player
+  - PowerupSpeedBoost
+  - PowerupFlying
   layers:
   - Default
   - TransparentFX
