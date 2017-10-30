@@ -968,6 +968,10 @@ Prefab:
       propertyPath: m_player
       value: 
       objectReference: {fileID: 465852270}
+    - target: {fileID: 1665089017738782, guid: f942877790055f14fbb8e3f39c05b67b, type: 2}
+      propertyPath: m_TagString
+      value: Collectable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f942877790055f14fbb8e3f39c05b67b, type: 2}
   m_IsPrefabParent: 0
