@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour {
 
 	private Rigidbody m_rigidbody;
 	private bool isJumping;
-	private bool m_upgradeFlight;
-	private float m_upgrateTimer;
+
+
+	public bool FlightUpgrade { get; set; }
+	public float Timer { get; set; }
+	public int m_score;
 
 	public float m_speed = 0;
 	public float m_maxSpeed;
@@ -19,8 +23,19 @@ public class PlayerController : MonoBehaviour {
 	void Start() {
 		m_rigidbody = GetComponent<Rigidbody>();
 		isJumping = false;
-		m_upgradeFlight = false;
-		m_upgrateTimer = 0;
+		FlightUpgrade = false;
+		Timer = 0;
+
+	}
+
+	void Update() {
+		if(FlightUpgrade == true) {
+			if(Timer >= 0) {
+				Timer -= Time.deltaTime;
+			}else {
+				FlightUpgrade = false;
+			}
+		}
 	}
 
 	//maybe swap back to char cont. for const. movement
@@ -30,9 +45,9 @@ public class PlayerController : MonoBehaviour {
 		if(m_rigidbody.velocity.magnitude >= m_maxSpeed) {
 			m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, m_maxSpeed);
 		}
-
+		
 		//jump if space pressed And currently grounded
-		if(Input.GetButtonDown("Jump") && isJumping == false) {
+		if(Input.GetButtonDown("Jump") && (isJumping == false || FlightUpgrade == true)) {
 			m_rigidbody.AddForce(m_jumpSpeed, ForceMode.Impulse);
 		}
 		//delete later, for testing purposes
@@ -47,12 +62,6 @@ public class PlayerController : MonoBehaviour {
 	void OnCollisionExit(Collision hit) {
 		isJumping = true;
 	}
-
-	//cheaper than destroy, but doesn't remove obj only turns rendering off, just add a pool and return it to it? 
-	void OnTriggerEnter(Collider hit) {
-		if(hit.tag == "PowerupFlying") {
-			hit.GetComponent<Renderer>().enabled = false;
-
-		}
-	}
 }
+
+
