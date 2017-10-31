@@ -8,7 +8,9 @@ public class PlayerController : MonoBehaviour {
 
 	private Rigidbody m_rigidbody;
 	private bool isJumping;
-
+	private float m_setMaxSpeed;
+	private Vector3 m_setJumpHeight;
+	private Vector3 TestVelocity;
 
 	//upgrade properties
 	public bool FlightUpgrade { get; set; }
@@ -16,11 +18,14 @@ public class PlayerController : MonoBehaviour {
 	public bool SpeedUpgrade { get; set; }
 	public float Timer { get; set; }
 
+	public float MaxSpeed { get; set; }
+	public Vector3 JumpSpeed { get; set; }
 	public int m_score;
 	public float m_speed = 0;
 	public float m_maxSpeed;
 	public Vector3 m_jumpSpeed;
-	private Vector3 TestVelocity;
+
+
 
 	// Use this for initialization
 	void Start() {
@@ -30,7 +35,10 @@ public class PlayerController : MonoBehaviour {
 		JumpUpgrade = false;
 		SpeedUpgrade = false;
 		Timer = 0;
-
+		MaxSpeed = m_maxSpeed;
+		JumpSpeed = m_jumpSpeed;
+		m_setJumpHeight = m_jumpSpeed;
+		m_setMaxSpeed = m_maxSpeed;
 	}
 
 	void Update() {
@@ -44,25 +52,23 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		//checks if jump upgrade active, same as above(EDIT OUT MAGIC NUMBERS)
+		//checks if jump upgrade active, same as above
 		if(JumpUpgrade == true) {
 			if(Timer >= 0 == true) {
 				Timer -= Time.deltaTime;
-				m_jumpSpeed = new Vector3(2, 12, 0);
 			}else {
 				JumpUpgrade = false;
-				m_jumpSpeed = new Vector3(0, 7, 0);
+				ResetJump();
 			}
 		}
 
-		//checks if speed upgrade active, same as above(MAGIC NUMBERS ARE BAD NEVER DO THIS CHANGE AFTER TESTING :y)
+		//checks if speed upgrade active, same as above
 		if(SpeedUpgrade == true) {
 			if(Timer >= 0 == true) {
 				Timer -= Time.deltaTime;
-				m_maxSpeed = 30;
 			}else{
 				SpeedUpgrade = false;
-				m_maxSpeed = 20;
+				ResetSpeed();
 			}
 		}
 	}
@@ -71,13 +77,13 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate() {
 		//adding speed to players force, then clamping it to be less than 20
 		m_rigidbody.AddForce(m_speed, 0, 0);
-		if(m_rigidbody.velocity.magnitude >= m_maxSpeed) {
-			m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, m_maxSpeed);
+		if(m_rigidbody.velocity.magnitude >= MaxSpeed) {
+			m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, MaxSpeed);
 		}
 		
 		//jump if space pressed And currently grounded/flight mode activated
 		if(Input.GetButtonDown("Jump") && (isJumping == false || FlightUpgrade == true)) {
-			m_rigidbody.AddForce(m_jumpSpeed, ForceMode.Impulse);
+			m_rigidbody.AddForce(JumpSpeed, ForceMode.Impulse);
 		}
 		//delete later, for testing purposes
 		TestVelocity = m_rigidbody.velocity;
@@ -85,10 +91,39 @@ public class PlayerController : MonoBehaviour {
 
 	//not currently using isGrounded due to no fast/easy way to add gravity while also allowing jumping(maybe change to raycasting to prevent sticking to sides)
 	void OnCollisionEnter(Collision hit) {
-		isJumping = false;
+		if(m_rigidbody.velocity.x == 0 ) {
+			isJumping = true;
+
+			print("hit side");
+		}else {
+			isJumping = false;
+		}
 	}
 
+	//make call bounceback when enter/exit, will do bounce back calculations hopefully
 	void OnCollisionExit(Collision hit) {
+		BounceBack();
 		isJumping = true;
+	}
+
+	bool BounceBack(Collision hit) {
+		if() {
+
+		}
+		else{
+
+		}
+		//int magnitude = 100000;
+		//Vector3 force = transform.position - hit.transform.position;
+		//force.Normalize();
+		//m_rigidbody.AddForce(-force * magnitude);
+	}
+
+	void ResetSpeed() {
+		MaxSpeed = m_setMaxSpeed;
+	}
+
+	void ResetJump() {
+		JumpSpeed = m_setJumpHeight;
 	}
 }
