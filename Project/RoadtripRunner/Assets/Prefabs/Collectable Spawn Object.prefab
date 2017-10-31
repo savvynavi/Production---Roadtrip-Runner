@@ -109,7 +109,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  currencyManager: {fileID: 1182540024802352, guid: 00d8cc1c9cd07e3469d62f6504cceb6c,
+    type: 2}
   collectablePrefab: {fileID: 1889369194122426, guid: 3a37ef9282b251f4bbe18d7b2a686a91,
     type: 2}
   ChanceOutOf100: 50
   playerTag: Player
+  currencyManagerTag: CurrencyManager

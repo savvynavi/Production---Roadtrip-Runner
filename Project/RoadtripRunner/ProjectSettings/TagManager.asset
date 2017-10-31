@@ -8,6 +8,8 @@ TagManager:
   - CollectableSpawner
   - player
   - Collectable
+  - PowerupFlying
+  - CurrencyManager
   layers:
   - Default
   - TransparentFX
