@@ -52,6 +52,9 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
+		//important mechanic fixes most of if not all the flaws in this game
+		Debug.Log ("shut up mikey");
+
 		//checks if jump upgrade active, same as above
 		if(JumpUpgrade == true) {
 			if(Timer >= 0 == true) {
@@ -94,7 +97,7 @@ public class PlayerController : MonoBehaviour {
 		if(m_rigidbody.velocity.x == 0 ) {
 			isJumping = true;
 
-			print("hit side");
+			Debug.Log("hit side");
 		}else {
 			isJumping = false;
 		}

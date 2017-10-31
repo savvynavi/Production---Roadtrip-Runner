@@ -9,7 +9,14 @@ public class NewPlayerController : MonoBehaviour {
 	public float m_maxSpeed = 20;
 	public float jumpSpeed = 15F;
 	public float gravity = 10.0F;
+	Transform spawn;
 	private Vector3 moveDirection = Vector3.zero;
+
+	void Start()
+	{
+		spawn.position = transform.position;
+	}
+
 	void Update() {
 		CharacterController controller = GetComponent<CharacterController>();
 		if(controller.isGrounded) {
@@ -22,5 +29,10 @@ public class NewPlayerController : MonoBehaviour {
 		}
 		moveDirection.y -= gravity * Time.deltaTime;
 		controller.Move(moveDirection * Time.deltaTime);
+		if (Physics.Raycast (transform.position, new Vector3 (1f, 0, 0), 1))
+		{
+			Debug.Log ("you is ded");
+			transform.position = spawn.position;
+		}
 	}
 }
