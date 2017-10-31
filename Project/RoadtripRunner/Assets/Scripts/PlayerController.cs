@@ -102,22 +102,22 @@ public class PlayerController : MonoBehaviour {
 
 	//make call bounceback when enter/exit, will do bounce back calculations hopefully
 	void OnCollisionExit(Collision hit) {
-		BounceBack();
+		//BounceBack();
 		isJumping = true;
 	}
 
-	bool BounceBack(Collision hit) {
-		if() {
+	//bool BounceBack(Collision hit) {
+		//if() {
 
-		}
-		else{
+		//}
+		//else{
 
-		}
+		//}
 		//int magnitude = 100000;
 		//Vector3 force = transform.position - hit.transform.position;
 		//force.Normalize();
 		//m_rigidbody.AddForce(-force * magnitude);
-	}
+	//}
 
 	void ResetSpeed() {
 		MaxSpeed = m_setMaxSpeed;

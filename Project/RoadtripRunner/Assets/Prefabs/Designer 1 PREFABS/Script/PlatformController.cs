@@ -8,6 +8,7 @@ public class PlatformController : MonoBehaviour {
 
 	public Transform t_activeCamera;
 
+	public bool b_isCamera;
 
 	// Use this for initialization
 	void Start () {
@@ -18,11 +19,12 @@ public class PlatformController : MonoBehaviour {
 	void Update () {
 		RaycastHit hit;
 		//raycast from camera to platformFocalPoint
-		Debug.DrawRay (t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), Color.red);
+		//Debug.DrawRay (t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), Color.red);
 		if (Physics.Raycast (t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), out hit)) 
 		{
 			transform.position = hit.point;
 		}
+
 		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 	}
 		
