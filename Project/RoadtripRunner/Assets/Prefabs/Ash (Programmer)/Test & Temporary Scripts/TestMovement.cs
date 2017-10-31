@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TestMovement : MonoBehaviour
 {
@@ -31,7 +32,11 @@ public class TestMovement : MonoBehaviour
             moveDirection.x = -8;
         control.Move(moveDirection * Time.deltaTime);
 
-        if (transform.position.x <= -140)
-            transform.position = new Vector3(16, 2, 0);
+        if (transform.position.x <= -120)
+        {
+            GameObject MenuController = GameObject.FindGameObjectWithTag("MenuController");
+            MenuController.GetComponent<MenuControl>().OnGameEnd();
+            SceneManager.UnloadSceneAsync(1);
+        }
     }
 }

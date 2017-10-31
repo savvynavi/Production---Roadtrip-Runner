@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 //SCRIPT EFFECT:
@@ -6,9 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class MenuControl : MonoBehaviour
 {
+    public string currencyControllerTag = "CurrencyController";
+    public CurrencyManagerScript currencyController;
     public GameObject mainPanel;
     public GameObject settingsPanel;
     public GameObject upgradePanel;
+    public Text rockPrice;
+    public Text paperPrice;
+    public Text scissorsPrice;
     public bool audioToggle;
 
     void Start()
@@ -16,6 +22,8 @@ public class MenuControl : MonoBehaviour
         mainPanel.SetActive(true);
         settingsPanel.SetActive(false);
         upgradePanel.SetActive(false);
+
+        currencyController = GameObject.FindGameObjectWithTag(currencyControllerTag).GetComponent<CurrencyManagerScript>();
     }
 
     public void Play_OnClick()
@@ -51,6 +59,39 @@ public class MenuControl : MonoBehaviour
         upgradePanel.SetActive(false);
     }
 
+    public void BuyRock_OnClick()
+    {
+        int price = int.Parse(rockPrice.text.Remove(0, 1));
+        if (currencyController.currency < price) { return; }
+
+        currencyController.currency -= price;
+        rockPrice.text = "$" + price * 2f;
+
+        //CODE FOR IMPROVING POWERUPS GO HERE
+    }
+
+    public void BuyPaper_OnClick()
+    {
+        int price = int.Parse(paperPrice.text.Remove(0, 1));
+        if (currencyController.currency < price) { return; }
+
+        currencyController.currency -= price;
+        paperPrice.text = "$" + price * 2;
+
+        //CODE FOR IMPROVING POWERUPS GO HERE
+    }
+
+    public void BuyScissors_OnClick()
+    {
+        int price = int.Parse(scissorsPrice.text.Remove(0, 1));
+        if (currencyController.currency < price) { return; }
+
+        currencyController.currency -= price;
+        scissorsPrice.text = "$" + price * 2;
+
+        //CODE FOR IMPROVING POWERUPS GO HERE
+    }
+
     public void Audio_OnToggle()
     {
         audioToggle = !audioToggle;
@@ -60,5 +101,13 @@ public class MenuControl : MonoBehaviour
         //    audioSource.SetActive(true);
         //else
         //    audioSource.SetActive(false);
+    }
+
+    //Call when level has ended, preferably before scene is closed
+    public void OnGameEnd()
+    {
+        mainPanel.SetActive(true);
+        settingsPanel.SetActive(false);
+        upgradePanel.SetActive(false);
     }
 }

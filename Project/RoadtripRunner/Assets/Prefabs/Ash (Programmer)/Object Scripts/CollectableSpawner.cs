@@ -7,19 +7,19 @@ public class CollectableSpawner : MonoBehaviour
 {
     private GameObject collectableObject;   
     public GameObject player;
-    public GameObject currencyManager;
+    public GameObject currencyController;
     public GameObject collectablePrefab;                    //Set this to the collectable prefab. Make sure it has a BoxCollider with IsTrigger checked
-    public int ChanceOutOf100 = 70;                         //Controls how likely it is that a collectable will spawn
+    public int ChanceOutOf100 = 80;                         //Controls how likely it is that a collectable will spawn
     public string playerTag = "Player";                     //Set this string to whatever the Player object tag is
-    public string currencyManagerTag = "CurrencyManager";   //Set this string to whatever the Currency Manager object tag is
+    public string currencyControllerTag = "CurrencyController";   //Set this string to whatever the Currency Manager object tag is
 
 
     void Start ()
     {
         player = GameObject.FindGameObjectWithTag(playerTag);
-        currencyManager = GameObject.FindGameObjectWithTag(currencyManagerTag);
+        currencyController = GameObject.FindGameObjectWithTag(currencyControllerTag);
 
-        if (Random.Range(1, 100) >= ChanceOutOf100) { return; }
+        if (Random.Range(1, 100) > ChanceOutOf100) { return; }
 
         Vector3 SpawnLocation = new Vector3(0, 1, 0);
         collectableObject = Instantiate(collectablePrefab, transform.position + SpawnLocation, new Quaternion(0, 90, 90, 0));
@@ -29,7 +29,7 @@ public class CollectableSpawner : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.tag != playerTag) { return; }
-        currencyManager.GetComponent<CurrencyManagerScript>().currency++;
+        currencyController.GetComponent<CurrencyManagerScript>().currency++;
         Destroy(collectableObject);
     }
 }

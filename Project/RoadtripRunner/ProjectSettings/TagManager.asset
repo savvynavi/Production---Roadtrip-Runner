@@ -9,7 +9,8 @@ TagManager:
   - player
   - Collectable
   - PowerupFlying
-  - CurrencyManager
+  - MenuController
+  - CurrencyController
   layers:
   - Default
   - TransparentFX
