@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour {
 	private bool isJumping;
 	private float m_setMaxSpeed;
 	private Vector3 m_setJumpHeight;
-	private Vector3 TestVelocity;
 
 	//upgrade properties
 	public bool FlightUpgrade { get; set; }
@@ -52,9 +51,6 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		//important mechanic fixes most of if not all the flaws in this game
-		Debug.Log ("shut up mikey");
-
 		//checks if jump upgrade active, same as above
 		if(JumpUpgrade == true) {
 			if(Timer >= 0 == true) {
@@ -76,7 +72,6 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	//maybe swap back to char cont. for const. movement
 	void FixedUpdate() {
 		//adding speed to players force, then clamping it to be less than 20
 		m_rigidbody.AddForce(m_speed, 0, 0);
@@ -88,39 +83,23 @@ public class PlayerController : MonoBehaviour {
 		if(Input.GetButtonDown("Jump") && (isJumping == false || FlightUpgrade == true)) {
 			m_rigidbody.AddForce(JumpSpeed, ForceMode.Impulse);
 		}
-		//delete later, for testing purposes
-		TestVelocity = m_rigidbody.velocity;
 	}
 
-	//not currently using isGrounded due to no fast/easy way to add gravity while also allowing jumping(maybe change to raycasting to prevent sticking to sides)
+	//checks to see if player is colliding with object, then if it's the floor before setting isJumping to false, prevents wall jumping 
 	void OnCollisionEnter(Collision hit) {
-		if(m_rigidbody.velocity.x == 0 ) {
-			isJumping = true;
-
-			Debug.Log("hit side");
-		}else {
+		var normal = hit.contacts[0].normal;
+		if(normal.y > 0) {
 			isJumping = false;
+		} else if(normal.y <= 0) {
+			isJumping = true;
 		}
 	}
 
-	//make call bounceback when enter/exit, will do bounce back calculations hopefully
+	//when not currently grounded, will 
 	void OnCollisionExit(Collision hit) {
-		//BounceBack();
 		isJumping = true;
 	}
 
-	//bool BounceBack(Collision hit) {
-		//if() {
-
-		//}
-		//else{
-
-		//}
-		//int magnitude = 100000;
-		//Vector3 force = transform.position - hit.transform.position;
-		//force.Normalize();
-		//m_rigidbody.AddForce(-force * magnitude);
-	//}
 
 	void ResetSpeed() {
 		MaxSpeed = m_setMaxSpeed;
