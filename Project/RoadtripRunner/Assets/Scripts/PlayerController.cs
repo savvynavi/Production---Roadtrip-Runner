@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
 	public float m_maxSpeed;
 	public Vector3 m_jumpSpeed;
 
-
+	private Vector3 TestVelocity;
 
 	// Use this for initialization
 	void Start() {
@@ -83,6 +83,8 @@ public class PlayerController : MonoBehaviour {
 		if(Input.GetButtonDown("Jump") && (isJumping == false || FlightUpgrade == true)) {
 			m_rigidbody.AddForce(JumpSpeed, ForceMode.Impulse);
 		}
+
+		TestVelocity = m_rigidbody.velocity;
 	}
 
 	//checks to see if player is colliding with object, then if it's the floor before setting isJumping to false, prevents wall jumping 
