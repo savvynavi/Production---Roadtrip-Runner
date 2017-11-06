@@ -84,6 +84,7 @@ public class PlayerController : MonoBehaviour {
 			m_rigidbody.AddForce(JumpSpeed, ForceMode.Impulse);
 		}
 
+		//testing purposes, delete later
 		TestVelocity = m_rigidbody.velocity;
 	}
 
@@ -94,10 +95,14 @@ public class PlayerController : MonoBehaviour {
 			isJumping = false;
 		} else if(normal.y <= 0) {
 			isJumping = true;
+			//if the speed upgrade is active, will let you "cut" through platforms when hitting their sides
+			if(SpeedUpgrade == true && hit.gameObject.CompareTag("Platform")) {
+				Destroy(hit.gameObject);
+			}
 		}
 	}
 
-	//when not currently grounded, will 
+	//when not currently grounded, will disable jump
 	void OnCollisionExit(Collision hit) {
 		isJumping = true;
 	}
