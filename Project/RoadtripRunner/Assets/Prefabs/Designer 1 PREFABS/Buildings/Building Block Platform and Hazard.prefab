@@ -197,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 1530108767965770}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -4, y: 0, z: -4}
-  m_LocalScale: {x: 3, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 2.5, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4710047896292442}
   m_RootOrder: 3
@@ -222,7 +222,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1266634622963976}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -39.8, y: 6, z: 121.9}
+  m_LocalPosition: {x: 24, y: 6, z: 33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4717774874601622}
@@ -243,7 +243,7 @@ Transform:
   m_GameObject: {fileID: 1352582380187216}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 4, z: -4}
-  m_LocalScale: {x: 3, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 2.5, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4710047896292442}
   m_RootOrder: 0
@@ -559,7 +559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   t_platformFocalPoint: {fileID: 4310736329277026}
   t_activeCamera: {fileID: 0}
-  m_speed: 50
+  m_speed: 75
   m_platformPos: {fileID: 4495569412401508}
   TestPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114492877202040962
@@ -575,6 +575,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   t_platformFocalPoint: {fileID: 4757139195034476}
   t_activeCamera: {fileID: 0}
-  m_speed: 50
+  m_speed: 75
   m_platformPos: {fileID: 4600305415626898}
   TestPos: {x: 0, y: 0, z: 0}

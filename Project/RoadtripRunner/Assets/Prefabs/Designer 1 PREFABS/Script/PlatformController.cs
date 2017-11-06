@@ -49,7 +49,7 @@ public class PlatformController : MonoBehaviour {
 
 	void SetDirection() {
 		m_direction = (m_platformPos.position - m_rigidbody.position);
-		Debug.Log("m_direction" + m_direction);
+
 	}
 
 	//testing pos stuff
