@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 1203772223069020}
   m_LocalRotation: {x: -0, y: -0, z: 0.70710576, w: 0.7071079}
   m_LocalPosition: {x: -4, y: 0, z: -4}
-  m_LocalScale: {x: 5.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 2.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4080298775692302}
   m_RootOrder: 1
@@ -347,6 +347,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   t_platformFocalPoint: {fileID: 4135731579476816}
   t_activeCamera: {fileID: 0}
-  m_speed: 50
+  m_speed: 75
   m_platformPos: {fileID: 4832955687228248}
   TestPos: {x: 0, y: 0, z: 0}
