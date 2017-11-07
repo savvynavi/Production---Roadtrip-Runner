@@ -10,6 +10,7 @@ public class UpgradeFlight : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		m_player.GetComponent<PlayerController>();
+		//m_timer += UpgradeControl.sci;
 	}
 
 	//on trigger, sets player flight check to true and gives it it's active time, then destroys this object

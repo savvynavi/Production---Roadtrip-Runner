@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		m_rigidbody = GetComponent<Rigidbody>();
-		isJumping = false;
+		isJumping = true;
 		FlightUpgrade = false;
 		JumpUpgrade = false;
 		SpeedUpgrade = false;
@@ -78,7 +78,8 @@ public class PlayerController : MonoBehaviour {
 		if(m_rigidbody.velocity.magnitude >= MaxSpeed) {
 			m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, MaxSpeed);
 		}
-		
+
+
 		//jump if space pressed And currently grounded/flight mode activated
 		if(Input.GetButtonDown("Jump") && (isJumping == false || FlightUpgrade == true)) {
 			m_rigidbody.AddForce(JumpSpeed, ForceMode.Impulse);
@@ -106,8 +107,7 @@ public class PlayerController : MonoBehaviour {
 	void OnCollisionExit(Collision hit) {
 		isJumping = true;
 	}
-
-
+	
 	void ResetSpeed() {
 		MaxSpeed = m_setMaxSpeed;
 	}
