@@ -16,8 +16,6 @@ public class ObjectPool : MonoBehaviour {
 	public List<ObjectsForPool> m_UserSetObjects;
 
 	private List<GameObject> m_pooledObjects;
-	private int m_numInPool = 0;
-	private bool m_isActive;
 
 	// Use this for initialization
 	void Start() {
@@ -33,10 +31,20 @@ public class ObjectPool : MonoBehaviour {
 		}
 	}
 
-	//activates the game object at a point in the scene
-	//public GameObject Activate(int element, Vector3 position) {
+	//checks if given element is active in the scene already, returns true if it is, false otherwise
+	bool IsActive(int element) {
+		if(m_pooledObjects[element].activeInHierarchy == true) {
+			return true;
+		}
+		return false;
+	}
 
-	//}
+	//activates the game object at a point in the scene
+	public GameObject Activate(int element, Vector3 position) {
+		m_pooledObjects[element].SetActive(true);
+		m_pooledObjects[element].transform.position = position;
+		return m_pooledObjects[element];
+	}
 
 	//deactivates it, returning it to the pool
 	public void Deactivate(GameObject tmp) {
