@@ -25,14 +25,14 @@ public class PlatformController : MonoBehaviour {
 	
 
 	void FixedUpdate() {
-        Vector3 viewPos = Camera.main.WorldToViewportPoint(t_platformFocalPoint.position);
             SetDirection();
             RaycastHit hit;
             //raycast from camera to platformFocalPoint
             Debug.DrawRay(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), Color.red);
 
-
-        if (viewPos.x > 0 && viewPos.x < 1)
+        float width = GetComponent<MeshFilter>().mesh.bounds.size.x / 2;
+        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
+        if (viewPos.x > 0 + width && viewPos.x < 1 - width)
         {
             if (Physics.Raycast(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), out hit))
             {
