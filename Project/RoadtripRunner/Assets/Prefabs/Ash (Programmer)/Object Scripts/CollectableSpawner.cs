@@ -16,7 +16,7 @@ public class CollectableSpawner : MonoBehaviour
     public int ChanceOutOf100 = 80;                                 //Controls how likely it is that a collectable will spawn
 
 
-    void Start ()
+    void Start()
     {
         player = GameObject.FindGameObjectWithTag(playerTag);
         upgradeController = GameObject.FindGameObjectWithTag(upgradeControllerTag);
