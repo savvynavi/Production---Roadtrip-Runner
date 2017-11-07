@@ -20,25 +20,27 @@ public class ObjectPool : MonoBehaviour {
 	private bool m_isActive;
 
 	// Use this for initialization
-	void Start () {
-		//m_objectsForPool = new List<ObjectsForPool>();
+	void Start() {
 		m_pooledObjects = new List<GameObject>();
 
-		//sets object pool size from number set by user for each object in inspector
-		for(int i = 0; i < m_UserSetObjects.Count; i++) {
-			m_numInPool += m_UserSetObjects[i].m_numOfThisType;
-		}
-
-
 		//loops for number of pooled objects, adds to the pool and sets active to false
-		for(int i = 0; i < m_numInPool; i++) {
-			for(int j = 0; j < m_UserSetObjects.Count; j++) {
-				GameObject tmp = (GameObject)Instantiate(m_UserSetObjects[j].m_object);
+		for(int i = 0; i < m_UserSetObjects.Count; i++) {
+			for(int j = 0; j < m_UserSetObjects[i].m_numOfThisType; j++) {
+				GameObject tmp = (GameObject)Instantiate(m_UserSetObjects[i].m_object);
 				tmp.SetActive(false);
 				m_pooledObjects.Add(tmp);
 			}
 		}
+	}
 
+	//activates the game object at a point in the scene
+	//public GameObject Activate(int element, Vector3 position) {
+
+	//}
+
+	//deactivates it, returning it to the pool
+	public void Deactivate(GameObject tmp) {
+		tmp.SetActive(false);
 	}
 
 }
