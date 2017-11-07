@@ -75,10 +75,13 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate() {
 		//adding speed to players force, then clamping it to be less than 20
 		m_rigidbody.AddForce(m_speed, 0, 0);
-		if(m_rigidbody.velocity.magnitude >= MaxSpeed) {
-			m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, MaxSpeed);
-		}
 
+		Vector3 velocity = m_rigidbody.velocity;
+
+		if(velocity.x >= MaxSpeed) {
+			velocity.x = Mathf.Clamp(velocity.x, 0, MaxSpeed);
+			m_rigidbody.velocity = velocity;
+		}
 
 		//jump if space pressed And currently grounded/flight mode activated
 		if(Input.GetButtonDown("Jump") && (isJumping == false || FlightUpgrade == true)) {
@@ -96,7 +99,7 @@ public class PlayerController : MonoBehaviour {
 			isJumping = false;
 		} else if(normal.y <= 0) {
 			isJumping = true;
-			//if the speed upgrade is active, will let you "cut" through platforms when hitting their sides
+			//if the speed upgrade is active, will let you "cut" through platforms when hitting their sides(when pool is done set to just turn off part of prefab)
 			if(SpeedUpgrade == true && hit.gameObject.CompareTag("Platform")) {
 				Destroy(hit.gameObject);
 			}
