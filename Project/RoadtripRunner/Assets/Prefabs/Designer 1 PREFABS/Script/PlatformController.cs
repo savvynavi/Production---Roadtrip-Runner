@@ -25,26 +25,35 @@ public class PlatformController : MonoBehaviour {
 	
 
 	void FixedUpdate() {
-		SetDirection();
-		RaycastHit hit;
-		//raycast from camera to platformFocalPoint
-		Debug.DrawRay(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), Color.red);
-		
-		if(Physics.Raycast(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), out hit)) {
-			m_platformPos.position = hit.point;
-			Debug.DrawRay(hit.point, (t_platformFocalPoint.position - hit.point), Color.green);
-		}
+        Vector3 viewPos = Camera.main.WorldToViewportPoint(t_platformFocalPoint.position);
+            SetDirection();
+            RaycastHit hit;
+            //raycast from camera to platformFocalPoint
+            Debug.DrawRay(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), Color.red);
 
-		if(transform.position.z == m_platformPos.position.z) {
-			SetSpeed = 0;
-		}else {
-			SetSpeed = m_speed;
-		}
 
-		//actual movement code
-		m_rigidbody.MovePosition(m_rigidbody.position + m_direction * m_speed * Time.deltaTime);
+        if (viewPos.x > 0 && viewPos.x < 1)
+        {
+            if (Physics.Raycast(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), out hit))
+            {
+                m_platformPos.position = hit.point;
+                Debug.DrawRay(hit.point, (t_platformFocalPoint.position - hit.point), Color.green);
+            }
+        }
 
-		TestPos = m_platformPos.position;
+            if (transform.position.z == m_platformPos.position.z)
+            {
+                SetSpeed = 0;
+            }
+            else
+            {
+                SetSpeed = m_speed;
+            }
+
+            //actual movement code
+            m_rigidbody.MovePosition(m_rigidbody.position + m_direction * m_speed * Time.deltaTime);
+
+            TestPos = m_platformPos.position;
 	}
 
 	void SetDirection() {
