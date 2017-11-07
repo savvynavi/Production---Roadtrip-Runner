@@ -3,11 +3,6 @@
 public class TestCamera : MonoBehaviour
 {
     public GameObject player;
-	
-    void Start()
-    {
-        transform.Rotate(new Vector3(10, 1, 0), 2);
-    }
 
     void Update ()
     {
