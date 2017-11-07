@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update() {
-		//checks if flight upgrade currently active, if so ticks down active time
+		//checks if flight/speed/jump upgrade currently active, if so ticks down active time
 		if(FlightUpgrade == true) {
 			if(Timer >= 0) {
 				//seperate out into fn call?
@@ -50,8 +50,6 @@ public class PlayerController : MonoBehaviour {
 				FlightUpgrade = false;
 			}
 		}
-
-		//checks if jump upgrade active, same as above
 		if(JumpUpgrade == true) {
 			if(Timer >= 0 == true) {
 				Timer -= Time.deltaTime;
@@ -60,8 +58,6 @@ public class PlayerController : MonoBehaviour {
 				ResetJump();
 			}
 		}
-
-		//checks if speed upgrade active, same as above
 		if(SpeedUpgrade == true) {
 			if(Timer >= 0 == true) {
 				Timer -= Time.deltaTime;
@@ -73,7 +69,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		//adding speed to players force, then clamping it to be less than 20
+		//adding speed to players force, then clamping it to be less than the max speed
 		m_rigidbody.AddForce(m_speed, 0, 0);
 
 		Vector3 velocity = m_rigidbody.velocity;
