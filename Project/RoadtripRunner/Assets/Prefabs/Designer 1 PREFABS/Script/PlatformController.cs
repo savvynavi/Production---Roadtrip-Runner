@@ -17,6 +17,8 @@ public class PlatformController : MonoBehaviour {
 	public Transform m_platformPos;
 	public Vector3 TestPos;
 
+	public Transform startOfPlatform;
+	public Transform endOfPlatform;
 	// Use this for initialization
 	void Start () {
 		m_rigidbody = GetComponent<Rigidbody>();
@@ -30,9 +32,10 @@ public class PlatformController : MonoBehaviour {
             //raycast from camera to platformFocalPoint
             Debug.DrawRay(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), Color.red);
 
-        float width = GetComponent<MeshFilter>().mesh.bounds.size.x / 2;
-        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
-        if (viewPos.x > 0 + width && viewPos.x < 1 - width)
+
+		Vector3 viewPos = Camera.main.WorldToViewportPoint(startOfPlatform.position);
+		Vector3 viewPos2 = Camera.main.WorldToViewportPoint (endOfPlatform.position);
+		if (viewPos.x > 0 || viewPos2.x > 0)
         {
             if (Physics.Raycast(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), out hit))
             {
