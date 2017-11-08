@@ -44,7 +44,6 @@ public class PlayerController : MonoBehaviour {
 		//checks if flight/speed/jump upgrade currently active, if so ticks down active time
 		if(FlightUpgrade == true) {
 			if(Timer >= 0) {
-				//seperate out into fn call?
 				Timer -= Time.deltaTime;
 			}else {
 				FlightUpgrade = false;
@@ -95,9 +94,9 @@ public class PlayerController : MonoBehaviour {
 			isJumping = false;
 		} else if(normal.y <= 0) {
 			isJumping = true;
-			//if the speed upgrade is active, will let you "cut" through platforms when hitting their sides(when pool is done set to just turn off part of prefab)
+			//if the speed upgrade is active, will let you "cut" through platforms when hitting their sides
 			if(SpeedUpgrade == true && hit.gameObject.CompareTag("Platform")) {
-				Destroy(hit.gameObject);
+				hit.gameObject.SetActive(false);
 			}
 		}
 	}

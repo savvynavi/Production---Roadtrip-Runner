@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour {
 
+	public Transform m_testPos;
+	//public PlatformController m_platControl;
+
 	//stores the type/number of a given object
 	[System.Serializable]
 	public class ObjectsForPool : System.Object{
@@ -14,11 +17,14 @@ public class ObjectPool : MonoBehaviour {
 	}
 
 	public List<ObjectsForPool> m_UserSetObjects;
+	public Transform m_camera;
 
-	private List<GameObject> m_pooledObjects;
+	private List<GameObject> m_pooledObjects = null;
 
 	// Use this for initialization
 	void Start() {
+		//m_platControl = GameObject.Find("RedLine1").GetComponent<PlatformController>();
+		
 		m_pooledObjects = new List<GameObject>();
 
 		//loops for number of pooled objects, adds to the pool and sets active to false
@@ -29,6 +35,8 @@ public class ObjectPool : MonoBehaviour {
 				m_pooledObjects.Add(tmp);
 			}
 		}
+
+		Activate(5, m_testPos);
 	}
 
 	//checks if given element is active in the scene already, returns true if it is, false otherwise
@@ -40,10 +48,16 @@ public class ObjectPool : MonoBehaviour {
 	}
 
 	//activates the game object at a point in the scene
-	public GameObject Activate(int element, Vector3 position) {
-		m_pooledObjects[element].SetActive(true);
-		m_pooledObjects[element].transform.position = position;
-		return m_pooledObjects[element];
+	public GameObject Activate(int element, Transform transform) {
+		if(IsActive(element) == false) {
+			GameObject m_currentObject = m_pooledObjects[element];
+			m_currentObject.SetActive(true);
+			m_currentObject.transform.position = transform.position;
+			m_currentObject.transform.rotation = transform.rotation;
+			//m_platControl.t_activeCamera = m_camera;
+			return m_currentObject;
+		}
+		return null;
 	}
 
 	//deactivates it, returning it to the pool

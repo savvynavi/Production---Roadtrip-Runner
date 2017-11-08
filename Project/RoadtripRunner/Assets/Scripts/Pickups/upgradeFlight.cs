@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UpgradeFlight : MonoBehaviour {
-
 	public PlayerController m_player;
 	public UpgradeControl m_upgradeControl;
 	public float m_timer;
