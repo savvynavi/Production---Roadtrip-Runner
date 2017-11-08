@@ -12,6 +12,7 @@ TagManager:
   - MenuController
   - UpgradeController
   - End
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - 
   - 
   - John Cena
-  - 
+  - RedLine
   - 
   - 
   - 

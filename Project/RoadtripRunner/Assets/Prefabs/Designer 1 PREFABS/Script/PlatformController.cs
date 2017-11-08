@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+//[RequireComponent(typeof(Rigidbody))]
 public class PlatformController : MonoBehaviour {
 
 	public Transform t_platformFocalPoint;
@@ -12,21 +12,25 @@ public class PlatformController : MonoBehaviour {
 	public float m_speed;
 	public float SetSpeed {get;set;}
 
-	private Rigidbody m_rigidbody;
+	//private Rigidbody m_rigidbody;
 	private Vector3 m_direction;
 	public Transform m_platformPos;
 	public Vector3 TestPos;
 
 	public Transform startOfPlatform;
 	public Transform endOfPlatform;
+
+
+
 	// Use this for initialization
 	void Start () {
-		m_rigidbody = GetComponent<Rigidbody>();
+		//m_rigidbody = GetComponent<Rigidbody>();
 		SetSpeed = m_speed;
+		LayerMask.NameToLayer ("Default");
 	}
 	
 
-	void FixedUpdate() {
+	void Update() {
             SetDirection();
             RaycastHit hit;
             //raycast from camera to platformFocalPoint
@@ -37,30 +41,30 @@ public class PlatformController : MonoBehaviour {
 		Vector3 viewPos2 = Camera.main.WorldToViewportPoint (endOfPlatform.position);
 		if (viewPos.x > 0 || viewPos2.x > 0)
         {
-            if (Physics.Raycast(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), out hit))
+			if (Physics.Raycast(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), out hit))
             {
                 m_platformPos.position = hit.point;
                 Debug.DrawRay(hit.point, (t_platformFocalPoint.position - hit.point), Color.green);
             }
         }
 
-            if (transform.position.z == m_platformPos.position.z)
-            {
-                SetSpeed = 0;
-            }
-            else
-            {
-                SetSpeed = m_speed;
-            }
+           // if (transform.position. z == m_platformPos.position.z)
+          //  {
+            //    SetSpeed = 0;
+          //  }
+           // else
+           // {
+          //      SetSpeed = m_speed;
+           // }
 
             //actual movement code
-            m_rigidbody.MovePosition(m_rigidbody.position + m_direction * m_speed * Time.deltaTime);
-
+            //m_rigidbody.MovePosition(m_rigidbody.position + m_direction * m_speed * Time.deltaTime);
+		transform.position = m_platformPos.position;
             TestPos = m_platformPos.position;
 	}
 
 	void SetDirection() {
-		m_direction = (m_platformPos.position - m_rigidbody.position);
+		//m_direction = (m_platformPos.position - m_rigidbody.position);
 
 	}
 
