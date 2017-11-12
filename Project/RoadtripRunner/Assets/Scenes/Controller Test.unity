@@ -887,7 +887,7 @@ MonoBehaviour:
     m_numOfThisType: 2
   - m_object: {fileID: 1843442045163798, guid: 9b13903ac66dc224a9a1686446fe3643, type: 2}
     m_numOfThisType: 3
-  - m_object: {fileID: 1393067352962126, guid: 379f88c6f405291448cd78722839917a, type: 2}
+  - m_object: {fileID: 1569392636306100, guid: 379f88c6f405291448cd78722839917a, type: 2}
     m_numOfThisType: 1
   m_camera: {fileID: 1174473394}
 --- !u!4 &817478506

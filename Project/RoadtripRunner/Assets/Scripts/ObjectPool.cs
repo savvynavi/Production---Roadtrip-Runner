@@ -36,7 +36,7 @@ public class ObjectPool : MonoBehaviour {
 			}
 		}
 
-		Activate(5, m_testPos);
+		//Activate(2, m_testPos);
 	}
 
 	//checks if given element is active in the scene already, returns true if it is, false otherwise
