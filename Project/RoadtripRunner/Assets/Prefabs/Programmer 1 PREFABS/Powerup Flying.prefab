@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33426258168015266}
   - component: {fileID: 65522487783840412}
   - component: {fileID: 23850863734924814}
-  - component: {fileID: 114522856294543824}
+  - component: {fileID: 114648398502000066}
   m_Layer: 0
   m_Name: Powerup Flying
   m_TagString: PowerupFlying
@@ -94,7 +94,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114522856294543824
+--- !u!114 &114648398502000066
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -107,4 +107,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_player: {fileID: 0}
   m_upgradeControl: {fileID: 0}
-  m_timer: 10
+  m_timer: 0

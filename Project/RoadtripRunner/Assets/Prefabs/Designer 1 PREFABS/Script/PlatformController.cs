@@ -5,9 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlatformController : MonoBehaviour {
 
-	public Transform t_platformFocalPoint;
+	public Transform m_platformFocalPoint;
 
-	public Transform t_activeCamera;
+	public Transform m_activeCamera;
+    public Transform SetCamera { get; set; }
 
 	public float m_speed;
 	public float SetSpeed {get;set;}
@@ -26,7 +27,8 @@ public class PlatformController : MonoBehaviour {
 	void Start () {
 		m_rigidbody = GetComponent<Rigidbody>();
 		SetSpeed = m_speed;
-		//LayerMask.NameToLayer ("Default");
+        SetCamera = m_activeCamera;
+		LayerMask.NameToLayer ("Default");
 	}
 	
 
@@ -34,17 +36,17 @@ public class PlatformController : MonoBehaviour {
 		SetDirection();
         RaycastHit hit;
         //raycast from camera to platformFocalPoint
-        Debug.DrawRay(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), Color.red);
+        Debug.DrawRay(m_activeCamera.position, (m_platformFocalPoint.position - m_activeCamera.position), Color.red);
 
 
-		//Vector3 viewPos = Camera.main.WorldToViewportPoint(startOfPlatform.position);
-		//Vector3 viewPos2 = Camera.main.WorldToViewportPoint (endOfPlatform.position);
-		//if(viewPos.x > 0 || viewPos2.x > 0) {
-			if(Physics.Raycast(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), out hit)) {
+		Vector3 viewPos = Camera.main.WorldToViewportPoint(startOfPlatform.position);
+		Vector3 viewPos2 = Camera.main.WorldToViewportPoint (endOfPlatform.position);
+		if(viewPos.x > 0 || viewPos2.x > 0) {
+			if(Physics.Raycast(m_activeCamera.position, (m_platformFocalPoint.position - m_activeCamera.position), out hit)) {
 				m_platformPos.position = hit.point;
-				Debug.DrawRay(hit.point, (t_platformFocalPoint.position - hit.point), Color.green);
+				Debug.DrawRay(hit.point, (m_platformFocalPoint.position - hit.point), Color.green);
 			}
-		//}
+		}
 
 		if(transform.position.z == m_platformPos.position.z) {
 			SetSpeed = 0;
