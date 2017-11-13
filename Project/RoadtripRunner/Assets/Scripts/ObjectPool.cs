@@ -23,8 +23,6 @@ public class ObjectPool : MonoBehaviour {
 
 	// Use this for initialization
 	void Start() {
-		//m_platControl = GameObject.Find("RedLine1").GetComponent<PlatformController>();
-		
 		m_pooledObjects = new List<GameObject>();
 
 		//loops for number of pooled objects, adds to the pool and sets active to false
@@ -36,7 +34,8 @@ public class ObjectPool : MonoBehaviour {
 			}
 		}
 
-		//Activate(2, m_testPos);
+		//test activation delete later
+		Activate(4, m_testPos);
 	}
 
 	//checks if given element is active in the scene already, returns true if it is, false otherwise
@@ -50,12 +49,11 @@ public class ObjectPool : MonoBehaviour {
 	//activates the game object at a point in the scene
 	public GameObject Activate(int element, Transform transform) {
 		if(IsActive(element) == false) {
-			GameObject m_currentObject = m_pooledObjects[element];
-			m_currentObject.SetActive(true);
-			m_currentObject.transform.position = transform.position;
-			m_currentObject.transform.rotation = transform.rotation;
-			//m_platControl.t_activeCamera = m_camera;
-			return m_currentObject;
+			GameObject currentObject = m_pooledObjects[element];
+			currentObject.SetActive(true);
+			currentObject.transform.position = transform.position;
+			currentObject.transform.rotation = transform.rotation;
+			return currentObject;
 		}
 		return null;
 	}

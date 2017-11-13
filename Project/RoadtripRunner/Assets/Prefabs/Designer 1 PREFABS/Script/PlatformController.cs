@@ -8,7 +8,7 @@ public class PlatformController : MonoBehaviour {
 	public Transform m_platformFocalPoint;
 
 	public Transform m_activeCamera;
-    public Transform SetCamera { get; set; }
+    //public Transform SetCamera { get; set; }
 
 	public float m_speed;
 	public float SetSpeed {get;set;}
@@ -27,8 +27,8 @@ public class PlatformController : MonoBehaviour {
 	void Start () {
 		m_rigidbody = GetComponent<Rigidbody>();
 		SetSpeed = m_speed;
-        SetCamera = m_activeCamera;
-		LayerMask.NameToLayer ("Default");
+		//SetCamera = m_activeCamera;
+		//LayerMask.NameToLayer ("Default");
 	}
 	
 
