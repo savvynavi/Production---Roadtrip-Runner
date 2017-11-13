@@ -94,6 +94,9 @@ public class PlayerController : MonoBehaviour {
 			isJumping = false;
 		} else if(normal.y <= 0) {
 			isJumping = true;
+			if(hit.gameObject.tag == "Platform") {
+				hit.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+			}
 			//if the speed upgrade is active, will let you "cut" through platforms when hitting their sides
 			if(SpeedUpgrade == true && hit.gameObject.CompareTag("Platform")) {
 				hit.gameObject.SetActive(false);
@@ -104,6 +107,9 @@ public class PlayerController : MonoBehaviour {
 	//when not currently grounded, will disable jump
 	void OnCollisionExit(Collision hit) {
 		isJumping = true;
+		if(hit.gameObject.tag == "Platform") {
+			hit.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+		}
 	}
 	
 	void ResetSpeed() {

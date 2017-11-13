@@ -26,7 +26,7 @@ public class PlatformController : MonoBehaviour {
 	void Start () {
 		m_rigidbody = GetComponent<Rigidbody>();
 		SetSpeed = m_speed;
-		LayerMask.NameToLayer ("Default");
+		//LayerMask.NameToLayer ("Default");
 	}
 	
 
@@ -39,19 +39,12 @@ public class PlatformController : MonoBehaviour {
 
 		//Vector3 viewPos = Camera.main.WorldToViewportPoint(startOfPlatform.position);
 		//Vector3 viewPos2 = Camera.main.WorldToViewportPoint (endOfPlatform.position);
-		//if (viewPos.x > 0 || viewPos2.x > 0)
-		//      {
-		//	if (Physics.Raycast(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), out hit))
-		//          {
-		//              m_platformPos.position = hit.point;
-		//              Debug.DrawRay(hit.point, (t_platformFocalPoint.position - hit.point), Color.green);
-		//          }
-		//      }
-
-		if(Physics.Raycast(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), out hit)) {
-			m_platformPos.position = hit.point;
-			Debug.DrawRay(hit.point, (t_platformFocalPoint.position - hit.point), Color.green);
-		}
+		//if(viewPos.x > 0 || viewPos2.x > 0) {
+			if(Physics.Raycast(t_activeCamera.position, (t_platformFocalPoint.position - t_activeCamera.position), out hit)) {
+				m_platformPos.position = hit.point;
+				Debug.DrawRay(hit.point, (t_platformFocalPoint.position - hit.point), Color.green);
+			}
+		//}
 
 		if(transform.position.z == m_platformPos.position.z) {
 			SetSpeed = 0;
