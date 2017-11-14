@@ -8,7 +8,7 @@ public class PlatformController : MonoBehaviour {
 	public Transform m_platformFocalPoint;
 
 	public Transform m_activeCamera;
-    //public Transform SetCamera { get; set; }
+    public Transform SetCamera { get; set; }
 
 	public float m_speed;
 	public float SetSpeed {get;set;}
@@ -16,7 +16,6 @@ public class PlatformController : MonoBehaviour {
 	private Rigidbody m_rigidbody;
 	private Vector3 m_direction;
 	public Transform m_platformPos;
-	public Vector3 TestPos;
 
 	public Transform startOfPlatform;
 	public Transform endOfPlatform;
@@ -27,8 +26,7 @@ public class PlatformController : MonoBehaviour {
 	void Start () {
 		m_rigidbody = GetComponent<Rigidbody>();
 		SetSpeed = m_speed;
-		//SetCamera = m_activeCamera;
-		//LayerMask.NameToLayer ("Default");
+		SetCamera = m_activeCamera;
 	}
 	
 
@@ -56,10 +54,9 @@ public class PlatformController : MonoBehaviour {
 
 		//actual movement code
 		m_rigidbody.MovePosition(m_rigidbody.position + m_direction * m_speed * Time.deltaTime);
-		//transform.position = m_platformPos.position;
-        TestPos = m_platformPos.position;
 	}
 
+	//sets the direction of the platform movement
 	void SetDirection() {
 		m_direction = (m_platformPos.position - m_rigidbody.position);
 
@@ -76,5 +73,4 @@ public class PlatformController : MonoBehaviour {
 		}
 		Gizmos.DrawWireCube(transform.position, m_platformPos.localScale);
 	}
-
 }

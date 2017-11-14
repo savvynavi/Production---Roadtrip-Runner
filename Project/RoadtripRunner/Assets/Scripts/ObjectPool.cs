@@ -7,7 +7,6 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour {
 
 	public Transform m_testPos;
-	//public PlatformController m_platControl;
 
 	//stores the type/number of a given object
 	[System.Serializable]
@@ -18,6 +17,7 @@ public class ObjectPool : MonoBehaviour {
 
 	public List<ObjectsForPool> m_UserSetObjects;
 	public Transform m_camera;
+	private PlatformController m_platform;
 
 	private List<GameObject> m_pooledObjects = null;
 
@@ -29,7 +29,7 @@ public class ObjectPool : MonoBehaviour {
 		for(int i = 0; i < m_UserSetObjects.Count; i++) {
 			for(int j = 0; j < m_UserSetObjects[i].m_numOfThisType; j++) {
 				GameObject tmp = (GameObject)Instantiate(m_UserSetObjects[i].m_object);
-				tmp.SetActive(false);
+				Deactivate(tmp);
 				m_pooledObjects.Add(tmp);
 			}
 		}
@@ -62,5 +62,4 @@ public class ObjectPool : MonoBehaviour {
 	public void Deactivate(GameObject tmp) {
 		tmp.SetActive(false);
 	}
-
 }
