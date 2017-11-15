@@ -39,8 +39,11 @@ public class PlatformController : MonoBehaviour {
 
 		Vector3 viewPos = Camera.main.WorldToViewportPoint(startOfPlatform.position);
 		Vector3 viewPos2 = Camera.main.WorldToViewportPoint (endOfPlatform.position);
+
+		LayerMask layerMask = (1<<10);
 		if(viewPos.x > 0 || viewPos2.x > 0) {
-			if(Physics.Raycast(m_activeCamera.position, (m_platformFocalPoint.position - m_activeCamera.position), out hit)) {
+			//should ignore collisions with layermask
+			if(Physics.Raycast(m_activeCamera.position, (m_platformFocalPoint.position - m_activeCamera.position), out hit, Mathf.Infinity ,~layerMask)) {
 				m_platformPos.position = hit.point;
 				Debug.DrawRay(hit.point, (m_platformFocalPoint.position - hit.point), Color.green);
 			}
@@ -59,7 +62,6 @@ public class PlatformController : MonoBehaviour {
 	//sets the direction of the platform movement
 	void SetDirection() {
 		m_direction = (m_platformPos.position - m_rigidbody.position);
-
 	}
 
 	//testing pos stuff

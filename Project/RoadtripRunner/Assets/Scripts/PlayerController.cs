@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour {
 
 	private Rigidbody m_rigidbody;
+	private CapsuleCollider m_collider;
 	private bool isJumping;
 	private float m_setMaxSpeed;
 	private Vector3 m_setJumpHeight;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		m_rigidbody = GetComponent<Rigidbody>();
+		m_collider = GetComponent<CapsuleCollider>();
 		isJumping = true;
 		FlightUpgrade = false;
 		JumpUpgrade = false;
@@ -68,6 +70,23 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+
+		isJumping = true;
+		RaycastHit hit;
+		Vector3 localScale = transform.lossyScale;
+		float castRadius = m_collider.radius * localScale.x;
+		float castDistance = localScale.x * (m_collider.height / 2 - castRadius) + 0.02f;
+		Debug.DrawLine(transform.position, transform.position - Vector3.up * 10);
+		//Physics.SphereCast(m_rigidbody.position + Vector3.up * 20, castRadius, -Vector3.up, out hit, 100)
+		//Physics.Raycast(transform.position, -Vector3.up, out hit, 10
+		if(Physics.SphereCast(m_rigidbody.position + Vector3.up * 20, castRadius, -Vector3.up, out hit, castDistance)) {
+			print("TEST");
+			if(hit.normal.y > 0) {
+				
+				isJumping = false;
+			}
+		}
+
 		//adding speed to players force, then clamping it to be less than the max speed
 		m_rigidbody.AddForce(m_speed, 0, 0);
 
@@ -88,24 +107,25 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	//checks to see if player is colliding with object, then if it's the floor before setting isJumping to false, prevents wall jumping 
-	void OnCollisionEnter(Collision hit) {
-		var normal = hit.contacts[0].normal;
-		if(normal.y > 0) {
-			isJumping = false;
-		} else if(normal.y <= 0) {
-			isJumping = true;
-			//if the speed upgrade is active, will let you "cut" through platforms when hitting their sides
-			if(SpeedUpgrade == true && hit.gameObject.CompareTag("Platform")) {
-				hit.gameObject.SetActive(false);
-			}
-		}
-	}
+	//void OnCollisionEnter(Collision hit) {
+	//	print("entered collision");
+	//	var normal = hit.contacts[0].normal;
+	//	if(normal.y > 0) {
+	//		isJumping = false;
+	//	} else if(normal.y <= 0) {
+	//		isJumping = true;
+	//		//if the speed upgrade is active, will let you "cut" through platforms when hitting their sides
+	//		if(SpeedUpgrade == true && hit.gameObject.CompareTag("Platform")) {
+	//			hit.gameObject.SetActive(false);
+	//		}
+	//	}
+	//}
 
-	//when not currently grounded, will disable jump
-	void OnCollisionExit(Collision hit) {
-		isJumping = true;
-	}
-	
+	////when not currently grounded, will disable jump
+	//void OnCollisionExit(Collision hit) {
+	//	isJumping = true;
+	//}
+
 	void ResetSpeed() {
 		MaxSpeed = m_setMaxSpeed;
 	}
