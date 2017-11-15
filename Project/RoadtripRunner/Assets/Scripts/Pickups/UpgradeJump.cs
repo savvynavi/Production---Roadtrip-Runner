@@ -20,7 +20,7 @@ public class UpgradeJump : MonoBehaviour {
 		if(hit.tag == "player") {
 			m_player.JumpUpgrade = true;
 			m_player.Timer = m_timer;
-			m_player.JumpSpeed = m_newJumpHeight * (m_upgradeControl.rockUpgradesBought + 1);
+			m_player.JumpSpeed = m_newJumpHeight + new Vector3(0, 1.2f * m_upgradeControl.rockUpgradesBought, 0);
 			Destroy(this.gameObject);
 		}
 	}

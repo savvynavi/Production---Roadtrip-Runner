@@ -24,6 +24,12 @@ public class PlayerController : MonoBehaviour {
 	public float m_maxSpeed;
 	public Vector3 m_jumpSpeed;
 
+    public string m_platformTag = "Platform";
+    public string m_characterFloorTag = "CharacterFloor";
+
+    public bool m_grounded;
+    public bool m_nearGround;
+
 	private Vector3 TestVelocity;
 
 	// Use this for initialization
@@ -78,13 +84,15 @@ public class PlayerController : MonoBehaviour {
 			m_rigidbody.velocity = velocity;
 		}
 
-		//jump if space pressed And currently grounded/flight mode activated
-		if(Input.GetButtonDown("Jump") && (isJumping == false || FlightUpgrade == true)) {
-			m_rigidbody.AddForce(JumpSpeed, ForceMode.Impulse);
-		}
+        //jump if space pressed And currently grounded/flight mode activated   //commented out for testing purposes
+        //if(Input.GetButtonDown("Jump") && ((isJumping == false && m_grounded == true) || FlightUpgrade == true)) {
+        //	m_rigidbody.AddForce(JumpSpeed, ForceMode.Impulse);
 
-		//testing purposes, delete later
-		TestVelocity = m_rigidbody.velocity;
+        if (Input.GetButtonDown("Jump") && m_grounded == true || FlightUpgrade == true)
+            m_rigidbody.AddForce(JumpSpeed, ForceMode.Impulse);
+
+        //testing purposes, delete later
+        TestVelocity = m_rigidbody.velocity;
 	}
 
 	//checks to see if player is colliding with object, then if it's the floor before setting isJumping to false, prevents wall jumping 
@@ -95,7 +103,7 @@ public class PlayerController : MonoBehaviour {
 		} else if(normal.y <= 0) {
 			isJumping = true;
 			//if the speed upgrade is active, will let you "cut" through platforms when hitting their sides
-			if(SpeedUpgrade == true && hit.gameObject.CompareTag("Platform")) {
+			if(SpeedUpgrade == true && hit.gameObject.CompareTag(m_platformTag)) {
 				hit.gameObject.SetActive(false);
 			}
 		}
@@ -105,8 +113,42 @@ public class PlayerController : MonoBehaviour {
 	void OnCollisionExit(Collision hit) {
 		isJumping = true;
 	}
-	
-	void ResetSpeed() {
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == m_platformTag)
+        {
+            if (CharacterIsGrounded(other.transform.position) == true)
+                m_grounded = true;
+            else
+            {
+                m_grounded = false;
+                m_nearGround = true;
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == m_platformTag)
+        {
+            m_grounded = false;
+            m_nearGround = false;
+        }
+    }
+
+    private bool CharacterIsGrounded(Vector3 pos)
+    {
+        Vector3 T = new Vector3();
+        foreach (Transform child in transform)
+            if (child.tag == m_characterFloorTag)
+                T = child.transform.position;
+
+        Plane P = new Plane(new Vector3(0, 1, 0), T);
+        return P.GetSide(pos);
+    }
+
+    void ResetSpeed() {
 		MaxSpeed = m_setMaxSpeed;
 	}
 
