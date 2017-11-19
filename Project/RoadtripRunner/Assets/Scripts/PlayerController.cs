@@ -75,14 +75,14 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit hit;
 		Vector3 localScale = transform.lossyScale;
 		float castRadius = m_collider.radius * localScale.x;
-		float castDistance = localScale.x * (m_collider.height / 2 - castRadius) + 0.02f;
-		Debug.DrawLine(transform.position, transform.position - Vector3.up * 10);
+		float castDistance = localScale.x * (m_collider.height / 2 - castRadius) + 25;
+		Debug.DrawLine(transform.position, transform.position - Vector3.up);
+		LayerMask layermask = 1 << 11;
 		//Physics.SphereCast(m_rigidbody.position + Vector3.up * 20, castRadius, -Vector3.up, out hit, 100)
 		//Physics.Raycast(transform.position, -Vector3.up, out hit, 10
-		if(Physics.SphereCast(m_rigidbody.position + Vector3.up * 20, castRadius, -Vector3.up, out hit, castDistance)) {
-			print("TEST");
+		if(Physics.SphereCast(m_rigidbody.position + Vector3.up * 20, castRadius, -Vector3.up, out hit, castDistance, layermask)) {
 			if(hit.normal.y > 0) {
-				
+				print("TEST");
 				isJumping = false;
 			}
 		}
