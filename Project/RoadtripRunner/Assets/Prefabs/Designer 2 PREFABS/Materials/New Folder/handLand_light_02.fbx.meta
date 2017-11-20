@@ -1,0 +1,169 @@
+fileFormatVersion: 2
+guid: 4f1898f4eeb3b024baefb0abc71a4b75
+timeCreated: 1510546091
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: arm
+    100002: group
+    100004: hand
+    100006: handControl
+    100008: //RootNode
+    100010: indexFinger_1
+    100012: indexFinger_2
+    100014: indexFinger_3
+    100016: indexFinger_4
+    100018: middleFinger_1
+    100020: middleFinger_2
+    100022: middleFinger_3
+    100024: middleFinger_4
+    100026: pinkie_1
+    100028: pinkie_2
+    100030: pinkie_3
+    100032: pinkie_4
+    100034: ringFinger_1
+    100036: ringFinger_2
+    100038: ringFinger_3
+    100040: ringFinger_4
+    100042: thumb_1
+    100044: thumb_2
+    100046: thumb_3
+    100048: thumb_4
+    100050: transform1
+    100052: wrist
+    400000: arm
+    400002: group
+    400004: hand
+    400006: handControl
+    400008: //RootNode
+    400010: indexFinger_1
+    400012: indexFinger_2
+    400014: indexFinger_3
+    400016: indexFinger_4
+    400018: middleFinger_1
+    400020: middleFinger_2
+    400022: middleFinger_3
+    400024: middleFinger_4
+    400026: pinkie_1
+    400028: pinkie_2
+    400030: pinkie_3
+    400032: pinkie_4
+    400034: ringFinger_1
+    400036: ringFinger_2
+    400038: ringFinger_3
+    400040: ringFinger_4
+    400042: thumb_1
+    400044: thumb_2
+    400046: thumb_3
+    400048: thumb_4
+    400050: transform1
+    400052: wrist
+    4300000: hand
+    7400000: handLand
+    9500000: //RootNode
+    13700000: hand
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: handLand
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 1
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 0a97f8d6183390b4d86e822b5993c1c0,
+    type: 3}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

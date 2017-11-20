@@ -21,7 +21,7 @@ public class UpgradeSpeed : MonoBehaviour {
 		if(hit.tag == "player") {
 			m_player.SpeedUpgrade = true;
 			m_player.Timer = m_timer;
-			m_player.MaxSpeed = m_newMaxSpeed * (m_upgradeControl.scissorsUpgradesBought + 1);
+			m_player.MaxSpeed = m_newMaxSpeed + (1.2f * m_upgradeControl.scissorsUpgradesBought);
 			Destroy(this.gameObject);
 		}
 	}

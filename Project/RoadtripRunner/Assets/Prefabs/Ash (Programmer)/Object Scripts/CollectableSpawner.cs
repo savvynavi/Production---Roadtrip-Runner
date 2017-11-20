@@ -8,7 +8,6 @@ public class CollectableSpawner : MonoBehaviour
     public string playerTag = "Player";                             //Set this string to whatever the Player object tag is
     public string upgradeControllerTag = "UpgradeController";       //Set this string to whatever the UpgradeManager object tag is
 
-    private GameObject player;
     private GameObject upgradeController;
 
     private GameObject collectableObject;   
@@ -18,7 +17,6 @@ public class CollectableSpawner : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag(playerTag);
         upgradeController = GameObject.FindGameObjectWithTag(upgradeControllerTag);
 
         if (Random.Range(1, 100) > ChanceOutOf100) { return; }

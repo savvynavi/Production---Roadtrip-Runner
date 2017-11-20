@@ -17,7 +17,7 @@ public class UpgradeFlight : MonoBehaviour {
 	void OnTriggerEnter(Collider hit) {
 		if(hit.tag == "player") {
 			m_player.FlightUpgrade = true;
-			m_player.Timer = m_timer * (m_upgradeControl.scissorsUpgradesBought + 1);
+			m_player.Timer = m_timer + ( 1.2f * m_upgradeControl.paperUpgradesBought);
 			Destroy(this.gameObject);
 		}
 	}
