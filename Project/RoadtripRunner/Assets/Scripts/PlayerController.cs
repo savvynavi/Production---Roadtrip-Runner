@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour {
 	public float m_speed = 0;
 	public float m_maxSpeed;
 	public Vector3 m_jumpSpeed;
+	public float m_nearGroundDistModifier = 0.5f;
 
 	private Vector3 TestVelocity;
 
@@ -70,21 +71,14 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-
 		isJumping = true;
-		RaycastHit hit;
-		Vector3 localScale = transform.lossyScale;
-		float castRadius = m_collider.radius * localScale.x;
-		float castDistance = localScale.x * (m_collider.height / 2 - castRadius) + 25;
-		Debug.DrawLine(transform.position, transform.position - Vector3.up);
-		LayerMask layermask = 1 << 11;
-		//Physics.SphereCast(m_rigidbody.position + Vector3.up * 20, castRadius, -Vector3.up, out hit, 100)
-		//Physics.Raycast(transform.position, -Vector3.up, out hit, 10
-		if(Physics.SphereCast(m_rigidbody.position + Vector3.up * 20, castRadius, -Vector3.up, out hit, castDistance, layermask)) {
-			if(hit.normal.y > 0) {
-				print("TEST");
-				isJumping = false;
-			}
+
+		//checks if grounded and if not, if it is close to the ground
+		if(DistAboveGround(0.2f) != null) {
+			print("TEST");
+			isJumping = false;
+		}else if(DistAboveGround(m_nearGroundDistModifier) != null && isJumping == true) {
+			print("INSERT ANIMATION HERE");
 		}
 
 		//adding speed to players force, then clamping it to be less than the max speed
@@ -106,26 +100,23 @@ public class PlayerController : MonoBehaviour {
 		TestVelocity = m_rigidbody.velocity;
 	}
 
-	//checks to see if player is colliding with object, then if it's the floor before setting isJumping to false, prevents wall jumping 
-	//void OnCollisionEnter(Collision hit) {
-	//	print("entered collision");
-	//	var normal = hit.contacts[0].normal;
-	//	if(normal.y > 0) {
-	//		isJumping = false;
-	//	} else if(normal.y <= 0) {
-	//		isJumping = true;
-	//		//if the speed upgrade is active, will let you "cut" through platforms when hitting their sides
-	//		if(SpeedUpgrade == true && hit.gameObject.CompareTag("Platform")) {
-	//			hit.gameObject.SetActive(false);
-	//		}
-	//	}
-	//}
+	//detects if a spherecast (taking dist mod as a paramater) is hitting the platforms(returns null when not hitting anything)
+	//can be used to both detect if player is grounded or just near the ground by using different distances
+	Collider DistAboveGround(float distance) {
+		RaycastHit hit;
+		Vector3 localScale = transform.lossyScale;
+		float castRadius = m_collider.radius * localScale.x;
+		float castDistance = localScale.x * (m_collider.height / 2 - castRadius) + distance;
+		LayerMask layermask = 1 << 11;
+		if(Physics.SphereCast(m_rigidbody.position + Vector3.up * (castRadius), castRadius, -Vector3.up, out hit, castDistance, layermask)) {
+			if(hit.normal.y > 0) {
+				return hit.collider;
+			}
+		}
+		return null;
+	}
 
-	////when not currently grounded, will disable jump
-	//void OnCollisionExit(Collision hit) {
-	//	isJumping = true;
-	//}
-
+	//resets speed/jump values after a powerup has timed out
 	void ResetSpeed() {
 		MaxSpeed = m_setMaxSpeed;
 	}
