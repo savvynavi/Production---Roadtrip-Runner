@@ -16,7 +16,7 @@ public class ObjectPool : MonoBehaviour {
 	}
 
 	public List<ObjectsForPool> m_UserSetObjects;
-	public Transform m_camera;
+	public Camera m_camera;
 	private PlatformController m_platform;
 
 	private List<GameObject> m_pooledObjects = null;
@@ -24,6 +24,7 @@ public class ObjectPool : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		m_pooledObjects = new List<GameObject>();
+		m_camera = Camera.main;
 
 		//loops for number of pooled objects, adds to the pool and sets active to false
 		for(int i = 0; i < m_UserSetObjects.Count; i++) {

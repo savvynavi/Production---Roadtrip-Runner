@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour {
 			print("TEST");
 			isJumping = false;
 		}else if(DistAboveGround(m_nearGroundDistModifier) != null && isJumping == true) {
-			print("INSERT ANIMATION HERE");
+			print("INSERT LANDING ANIMATION HERE");
 		}
 
 		//adding speed to players force, then clamping it to be less than the max speed
@@ -102,11 +102,11 @@ public class PlayerController : MonoBehaviour {
 
 	//detects if a spherecast (taking dist mod as a paramater) is hitting the platforms(returns null when not hitting anything)
 	//can be used to both detect if player is grounded or just near the ground by using different distances
-	Collider DistAboveGround(float distance) {
+	Collider DistAboveGround(float distanceMod) {
 		RaycastHit hit;
 		Vector3 localScale = transform.lossyScale;
 		float castRadius = m_collider.radius * localScale.x;
-		float castDistance = localScale.x * (m_collider.height / 2 - castRadius) + distance;
+		float castDistance = localScale.x * (m_collider.height / 2 - castRadius) + distanceMod;
 		LayerMask layermask = 1 << 11;
 		if(Physics.SphereCast(m_rigidbody.position + Vector3.up * (castRadius), castRadius, -Vector3.up, out hit, castDistance, layermask)) {
 			if(hit.normal.y > 0) {
