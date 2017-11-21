@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
 
 	private Vector3 TestVelocity;
 
+	public Animator m_AnimControl;
 	// Use this for initialization
 	void Start() {
 		m_rigidbody = GetComponent<Rigidbody>();
@@ -73,6 +74,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+		//sending info to animator
+		m_AnimControl.SetFloat ("speed", m_percentOfSpeed);
+
 		isJumping = true;
 		m_nearGround = false;
 
@@ -98,6 +102,7 @@ public class PlayerController : MonoBehaviour {
 		//jump if space pressed And currently grounded/flight mode activated
 		if(Input.GetButtonDown("Jump") && (isJumping == false || FlightUpgrade == true)) {
 			m_rigidbody.AddForce(JumpSpeed, ForceMode.Impulse);
+			m_AnimControl.SetTrigger ("IsJumping");
 		}
 
 
