@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour {
 	public float m_maxSpeed;
 	public Vector3 m_jumpSpeed;
 	public float m_nearGroundDistModifier = 0.5f;
+	public bool m_nearGround;
+	public float m_percentOfSpeed = 0;
 
 	private Vector3 TestVelocity;
 
@@ -72,6 +74,7 @@ public class PlayerController : MonoBehaviour {
 
 	void FixedUpdate() {
 		isJumping = true;
+		m_nearGround = false;
 
 		//checks if grounded and if not, if it is close to the ground
 		if(DistAboveGround(0.2f) != null) {
@@ -79,6 +82,7 @@ public class PlayerController : MonoBehaviour {
 			isJumping = false;
 		}else if(DistAboveGround(m_nearGroundDistModifier) != null && isJumping == true) {
 			print("INSERT LANDING ANIMATION HERE");
+			m_nearGround = true;
 		}
 
 		//adding speed to players force, then clamping it to be less than the max speed
@@ -96,6 +100,13 @@ public class PlayerController : MonoBehaviour {
 			m_rigidbody.AddForce(JumpSpeed, ForceMode.Impulse);
 		}
 
+
+		if((((m_rigidbody.velocity.x - m_speed) / (MaxSpeed - m_speed)) * 100) <= 0) {
+			m_percentOfSpeed = 0;
+		}else {
+			m_percentOfSpeed = ((m_rigidbody.velocity.x - m_speed) / (MaxSpeed - m_speed)) * 100;
+		}
+
 		//testing purposes, delete later
 		TestVelocity = m_rigidbody.velocity;
 	}
@@ -106,9 +117,9 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit hit;
 		Vector3 localScale = transform.lossyScale;
 		float castRadius = m_collider.radius * localScale.x;
-		float castDistance = localScale.x * (m_collider.height / 2 - castRadius) + distanceMod;
+		float castDistance = localScale.x * ((m_collider.height / 2) - castRadius) + distanceMod;
 		LayerMask layermask = 1 << 11;
-		if(Physics.SphereCast(m_rigidbody.position + Vector3.up * (castRadius), castRadius, -Vector3.up, out hit, castDistance, layermask)) {
+		if(Physics.SphereCast(m_rigidbody.position + Vector3.up * castRadius, castRadius, -Vector3.up, out hit, castDistance, layermask)) {
 			if(hit.normal.y > 0) {
 				return hit.collider;
 			}
