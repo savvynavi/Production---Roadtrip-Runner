@@ -1,68 +1,17 @@
 fileFormatVersion: 2
-guid: 25b61291419038e41839ae5cbd1d27a4
-timeCreated: 1511308615
+guid: ecd4920b38d3151468ced52361c2cd85
+timeCreated: 1511311369
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: arm
-    100002: group
-    100004: hand
-    100006: //RootNode
-    100008: indexFinger_1
-    100010: indexFinger_2
-    100012: indexFinger_3
-    100014: indexFinger_4
-    100016: middleFinger_1
-    100018: middleFinger_2
-    100020: middleFinger_3
-    100022: middleFinger_4
-    100024: nurbsCircle1
-    100026: pinkie_1
-    100028: pinkie_2
-    100030: pinkie_3
-    100032: pinkie_4
-    100034: ringFinger_1
-    100036: ringFinger_2
-    100038: ringFinger_3
-    100040: ringFinger_4
-    100042: thumb_1
-    100044: thumb_2
-    100046: thumb_3
-    100048: thumb_4
-    100050: transform1
-    100052: wrist
-    400000: arm
-    400002: group
-    400004: hand
-    400006: //RootNode
-    400008: indexFinger_1
-    400010: indexFinger_2
-    400012: indexFinger_3
-    400014: indexFinger_4
-    400016: middleFinger_1
-    400018: middleFinger_2
-    400020: middleFinger_3
-    400022: middleFinger_4
-    400024: nurbsCircle1
-    400026: pinkie_1
-    400028: pinkie_2
-    400030: pinkie_3
-    400032: pinkie_4
-    400034: ringFinger_1
-    400036: ringFinger_2
-    400038: ringFinger_3
-    400040: ringFinger_4
-    400042: thumb_1
-    400044: thumb_2
-    400046: thumb_3
-    400048: thumb_4
-    400050: transform1
-    400052: wrist
-    4300000: hand
-    7400000: Take 001
-    9500000: //RootNode
-    13700000: hand
+    100000: modularHouse_endDoorless_01
+    100002: //RootNode
+    400000: modularHouse_endDoorless_01
+    400002: //RootNode
+    2300000: modularHouse_endDoorless_01
+    3300000: modularHouse_endDoorless_01
+    4300000: modularHouse_endDoorless_01
   materials:
     importMaterials: 1
     materialName: 0
@@ -132,7 +81,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

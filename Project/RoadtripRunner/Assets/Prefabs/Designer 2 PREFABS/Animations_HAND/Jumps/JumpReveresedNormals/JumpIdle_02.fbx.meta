@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8b67120dd78207e4e9c7c122fe4bf209
-timeCreated: 1511140179
+guid: f7696d7823161204eba5fe85c6b56028
+timeCreated: 1511153047
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -60,7 +60,7 @@ ModelImporter:
     400050: transform1
     400052: wrist
     4300000: hand
-    7400000: jump animation
+    7400000: in air
     9500000: //RootNode
     13700000: hand
   materials:
@@ -88,10 +88,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: jump animation
+      name: in air
       takeName: Take 001
-      firstFrame: 1
-      lastFrame: 19
+      firstFrame: 3.6
+      lastFrame: 29
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
