@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	private bool isJumping;
 	private float m_setMaxSpeed;
 	private Vector3 m_setJumpHeight;
+	private Animator m_AnimControl;
 
 	//upgrade properties
 	public bool FlightUpgrade { get; set; }
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour {
 
 	public float MaxSpeed { get; set; }
 	public Vector3 JumpSpeed { get; set; }
+
 	public int m_score;
 	public float m_speed = 0;
 	public float m_maxSpeed;
@@ -28,13 +30,17 @@ public class PlayerController : MonoBehaviour {
 	public bool m_nearGround;
 	public float m_percentOfSpeed = 0;
 
+	//animation vars
+	private int m_jumpHash = Animator.StringToHash("IsJumping");
+
 	private Vector3 TestVelocity;
 
-	public Animator m_AnimControl;
+
 	// Use this for initialization
 	void Start() {
 		m_rigidbody = GetComponent<Rigidbody>();
 		m_collider = GetComponent<CapsuleCollider>();
+		m_AnimControl = GetComponent<Animator>();
 		isJumping = true;
 		FlightUpgrade = false;
 		JumpUpgrade = false;
@@ -82,7 +88,7 @@ public class PlayerController : MonoBehaviour {
 
 		//checks if grounded and if not, if it is close to the ground
 		if(DistAboveGround(0.2f) != null) {
-			print("TEST");
+			print("GROUNDED");
 			isJumping = false;
 		}else if(DistAboveGround(m_nearGroundDistModifier) != null && isJumping == true) {
 			print("INSERT LANDING ANIMATION HERE");
@@ -102,7 +108,7 @@ public class PlayerController : MonoBehaviour {
 		//jump if space pressed And currently grounded/flight mode activated
 		if(Input.GetButtonDown("Jump") && (isJumping == false || FlightUpgrade == true)) {
 			m_rigidbody.AddForce(JumpSpeed, ForceMode.Impulse);
-			m_AnimControl.SetTrigger ("IsJumping");
+			m_AnimControl.SetTrigger (m_jumpHash);
 		}
 
 
