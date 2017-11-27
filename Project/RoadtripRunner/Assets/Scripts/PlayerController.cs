@@ -82,8 +82,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		//sending info to animator
-		m_animControls.SetFloat ("speed", m_percentOfSpeed);
 
 		isJumping = true;
 		m_nearGround = false;
@@ -119,6 +117,9 @@ public class PlayerController : MonoBehaviour {
 		}else {
 			m_percentOfSpeed = ((m_rigidbody.velocity.x - m_speed) / (MaxSpeed - m_speed)) * 100;
 		}
+
+		//sending speed info to animator
+		m_animControls.SetFloat("speed", m_percentOfSpeed);
 
 		//testing purposes, delete later
 		TestVelocity = m_rigidbody.velocity;
