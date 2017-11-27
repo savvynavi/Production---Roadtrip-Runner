@@ -134,9 +134,9 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit hit;
 		Vector3 localScale = transform.lossyScale;
 		float castRadius = m_collider.radius * localScale.x;
-		float castDistance = localScale.x * ((m_collider.height / 2) - castRadius) + distanceMod;
-		LayerMask layermask = 1 << 11;
-		if(Physics.SphereCast(m_rigidbody.position + Vector3.up * castRadius, castRadius, -Vector3.up, out hit, castDistance, layermask)) {
+		float castDistance = m_collider.height + distanceMod;
+		LayerMask layermask = LayerMask.GetMask("PlatformLayer");
+		if(Physics.SphereCast(m_rigidbody.position + Vector3.up * (m_collider.height - castRadius), castRadius, -Vector3.up, out hit, castDistance, layermask)) {
 			if(hit.normal.y > 0) {
 				return hit.collider;
 			}
