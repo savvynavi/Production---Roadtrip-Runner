@@ -42,6 +42,10 @@ public class MenuControl : MonoBehaviour
         settingsPanel.SetActive(false);
         upgradePanel.SetActive(false);
 
+        Pause PauseScript = GetComponent<Pause>();
+        PauseScript.playing = true;
+        PauseScript.lastCurrency = upgradeControl.GetComponent<UpgradeControl>().currency;
+
         //This loads a test scene. To add a scene, go into File > Build Settings and drop a scene in. Then, put the corresponding number below (first scene is 0, second 1, etc)
         //Note that loadscenemode.additive should be used so that Upgrade functionality is retained. Remember to disable any menu objects/UI above before loading the scene
         SceneManager.LoadScene(1, LoadSceneMode.Additive);
