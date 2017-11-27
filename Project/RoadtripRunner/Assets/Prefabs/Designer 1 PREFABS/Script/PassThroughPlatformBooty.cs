@@ -12,10 +12,17 @@ public class PassThroughPlatformBooty : MonoBehaviour {
 	// Update is called once per frame
 	void OnTriggerEnter(Collider Other)
 	{
-		Other.isTrigger = false;
+		if (Other.CompareTag ("Platform") == true) 
+		{
+			Other.isTrigger = false;
+		}
+
 	}
 	void OnTriggerExit(Collider Other)
 	{
-		Other.isTrigger = true;
+		if (Other.CompareTag ("Platform") == true) 
+		{
+			Other.isTrigger = true;
+		}
 	}
 }
