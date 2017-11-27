@@ -9,5 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu Test.unity
     guid: bae33bc107434c8468a6ddd193089427
   - enabled: 1
+    path: Assets/Scenes/FinalScene (DO NOT EDIT).unity
+    guid: 7aba5c2f484831641956b0c1ed6bb6e8
+  - enabled: 0
     path: Assets/Scenes/Respawn & Collectable Test.unity
     guid: 1bb442d00ed13594ba3f86ecbcf306b4
+  - enabled: 0
+    path: Assets/Scenes/Segment Test and Creation Scene.unity
+    guid: 70b1d4ca524a91a42b36725ceec042f4

@@ -709,7 +709,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1815775001341872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.8, y: 15.5, z: 0}
+  m_LocalPosition: {x: 16.8, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4985454276605342}
@@ -1163,7 +1163,7 @@ MonoBehaviour:
   m_score: 0
   m_speed: 20
   m_maxSpeed: 50
-  m_jumpSpeed: {x: 20, y: 15, z: 0}
+  m_jumpSpeed: {x: 0, y: 15, z: 0}
   m_nearGroundDistModifier: 0.5
   m_nearGround: 0
   m_percentOfSpeed: 0

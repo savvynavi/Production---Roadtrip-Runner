@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 m_setJumpHeight;
 	private Animator m_animControls;
 
+	public AudioSource audioSource;
+
 	//upgrade properties
 	public bool FlightUpgrade { get; set; }
 	public bool JumpUpgrade { get; set; }
@@ -109,6 +111,7 @@ public class PlayerController : MonoBehaviour {
 		if(Input.GetButtonDown("Jump") && (isJumping == false || FlightUpgrade == true)) {
 			m_rigidbody.AddForce(JumpSpeed, ForceMode.Impulse);
 			m_animControls.SetTrigger (m_jumpHash);
+			audioSource.Play ();
 		}
 
 
