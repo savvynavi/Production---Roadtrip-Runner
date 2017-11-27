@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
 	private bool isJumping;
 	private float m_setMaxSpeed;
 	private Vector3 m_setJumpHeight;
-	private Animator m_AnimControl;
+	private Animator m_animControls;
 
 	//upgrade properties
 	public bool FlightUpgrade { get; set; }
@@ -40,7 +40,9 @@ public class PlayerController : MonoBehaviour {
 	void Start() {
 		m_rigidbody = GetComponent<Rigidbody>();
 		m_collider = GetComponent<CapsuleCollider>();
-		m_AnimControl = GetComponent<Animator>();
+
+		m_animControls = GetComponentInChildren<Animator>();
+
 		isJumping = true;
 		FlightUpgrade = false;
 		JumpUpgrade = false;
@@ -81,7 +83,7 @@ public class PlayerController : MonoBehaviour {
 
 	void FixedUpdate() {
 		//sending info to animator
-		m_AnimControl.SetFloat ("speed", m_percentOfSpeed);
+		m_animControls.SetFloat ("speed", m_percentOfSpeed);
 
 		isJumping = true;
 		m_nearGround = false;
@@ -108,7 +110,7 @@ public class PlayerController : MonoBehaviour {
 		//jump if space pressed And currently grounded/flight mode activated
 		if(Input.GetButtonDown("Jump") && (isJumping == false || FlightUpgrade == true)) {
 			m_rigidbody.AddForce(JumpSpeed, ForceMode.Impulse);
-			m_AnimControl.SetTrigger (m_jumpHash);
+			m_animControls.SetTrigger (m_jumpHash);
 		}
 
 
