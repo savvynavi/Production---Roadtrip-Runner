@@ -140,6 +140,7 @@ MonoBehaviour:
   mainPanel: {fileID: 207540153}
   settingsPanel: {fileID: 664490866}
   upgradePanel: {fileID: 1875537973}
+  mainCamera: {fileID: 1312630970}
   audioToggle: 0
 --- !u!224 &4901832
 RectTransform:
@@ -173,7 +174,7 @@ MonoBehaviour:
   playing: 0
   menuCanvas: {fileID: 1476973731}
   pauseCanvas: {fileID: 2091097900}
-  upgradeController: {fileID: 0}
+  upgradeController: {fileID: 44969683}
   menuCanvasTag: MenuCanvas
   pauseCanvasTag: PauseCanvas
   upgradeControlTag: UpgradeController

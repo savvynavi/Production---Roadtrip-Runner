@@ -16,6 +16,7 @@ TagManager:
   - CharacterFloor
   - MenuCanvas
   - PauseCanvas
+  - Obstacle
   layers:
   - Default
   - TransparentFX

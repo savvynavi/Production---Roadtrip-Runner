@@ -39,8 +39,13 @@ public class SegmentControl : MonoBehaviour
 
         PlaceNextSegment(firstSegmentPosition);
     }
-	
-	void Update()
+
+    void OnDestroy()
+    {
+        FlushOnReturnToMenu();
+    }
+
+    void Update()
     {
         float CamZPos = mainCamera.transform.position.z;
         for (int i = 0; i < segmentObjects.Count; i++)
@@ -103,5 +108,11 @@ public class SegmentControl : MonoBehaviour
                 segmentIndex = Entry.Key;
 
         segmentObjects[segmentIndex].transform.position = SpawnToPos;
+    }
+
+    public void FlushOnReturnToMenu()
+    {
+        foreach (var Segment in segmentObjects)
+            Destroy(Segment);
     }
 }

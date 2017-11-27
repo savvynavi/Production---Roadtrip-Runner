@@ -12,6 +12,7 @@ public class MenuControl : MonoBehaviour
     public GameObject mainPanel;                                    //Drop the panel containing the main menu screen to this variable
     public GameObject settingsPanel;                                //Drop the panel containing the settings screen to this variable
     public GameObject upgradePanel;                                 //Drop the panel containing the upgrades screen to this variable
+    public GameObject mainCamera;
 
     public bool audioToggle;
 
@@ -28,6 +29,7 @@ public class MenuControl : MonoBehaviour
     #region MenuControl Functions
     public void OnGameEnd()                                         //Call when level has ended, preferably before the scene is closed
     {
+        mainCamera.SetActive(true);
         mainPanel.SetActive(true);
         settingsPanel.SetActive(false);
         upgradePanel.SetActive(false);
@@ -42,13 +44,16 @@ public class MenuControl : MonoBehaviour
         settingsPanel.SetActive(false);
         upgradePanel.SetActive(false);
 
-        Pause PauseScript = GetComponent<Pause>();
-        PauseScript.playing = true;
-        PauseScript.lastCurrency = upgradeControl.GetComponent<UpgradeControl>().currency;
 
         //This loads a test scene. To add a scene, go into File > Build Settings and drop a scene in. Then, put the corresponding number below (first scene is 0, second 1, etc)
         //Note that loadscenemode.additive should be used so that Upgrade functionality is retained. Remember to disable any menu objects/UI above before loading the scene
         SceneManager.LoadScene(1, LoadSceneMode.Additive);
+
+        mainCamera.SetActive(false);
+
+        Pause PauseScript = GetComponent<Pause>();
+        PauseScript.playing = true;
+        PauseScript.lastCurrency = upgradeControl.GetComponent<UpgradeControl>().currency;
     }
 
     public void Settings_OnClick()

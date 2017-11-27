@@ -36,7 +36,7 @@ public class Pause : MonoBehaviour {
             SetPause(1f, false, false);
     }
 
-    private void SetPause(float TimeScale, bool PauseValue, bool PauseCanvasActive) // => paused = PauseValue
+    public void SetPause(float TimeScale, bool PauseValue, bool PauseCanvasActive)
     {
         Time.timeScale = TimeScale;
         paused = PauseValue;
@@ -55,6 +55,7 @@ public class Pause : MonoBehaviour {
         SceneManager.UnloadSceneAsync(1);
         playing = false;
         SetPause(1f, false, false);
-        GetComponent<MenuControl>().Back_OnClick();
+        GetComponent<MenuControl>().OnGameEnd();
+        GetComponent<MenuControl>().mainCamera.SetActive(true);
     }
 }
