@@ -12,8 +12,7 @@ public class PlayerController : MonoBehaviour {
 	private float m_setMaxSpeed;
 	private Vector3 m_setJumpHeight;
 	private Animator m_animControls;
-
-	public AudioSource audioSource;
+	private AudioSource m_audioSource;
 
 	//upgrade properties
 	public bool FlightUpgrade { get; set; }
@@ -34,6 +33,7 @@ public class PlayerController : MonoBehaviour {
 
 	//animation vars
 	private int m_jumpHash = Animator.StringToHash("IsJumping");
+	private int m_landHash = Animator.StringToHash("NearGround");
 
 	private Vector3 TestVelocity;
 
@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour {
 		m_collider = GetComponent<CapsuleCollider>();
 
 		m_animControls = GetComponentInChildren<Animator>();
+		m_audioSource = GetComponent<AudioSource>();
 
 		isJumping = true;
 		FlightUpgrade = false;
@@ -93,7 +94,7 @@ public class PlayerController : MonoBehaviour {
 			print("GROUNDED");
 			isJumping = false;
 		}else if(DistAboveGround(m_nearGroundDistModifier) != null && isJumping == true) {
-            m_animControls.SetTrigger("NearGround");
+            m_animControls.SetTrigger(m_landHash);
 			print("INSERT LANDING ANIMATION HERE");
 			m_nearGround = true;
 		}
@@ -112,7 +113,7 @@ public class PlayerController : MonoBehaviour {
 		if(Input.GetButtonDown("Jump") && (isJumping == false || FlightUpgrade == true)) {
 			m_rigidbody.AddForce(JumpSpeed, ForceMode.Impulse);
 			m_animControls.SetTrigger (m_jumpHash);
-			audioSource.Play ();
+			m_audioSource.Play();
 		}
 
 
