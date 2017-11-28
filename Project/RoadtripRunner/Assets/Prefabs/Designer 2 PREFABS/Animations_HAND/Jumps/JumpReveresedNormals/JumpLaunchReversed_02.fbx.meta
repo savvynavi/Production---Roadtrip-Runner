@@ -90,8 +90,8 @@ ModelImporter:
     - serializedVersion: 16
       name: jump animation
       takeName: Take 001
-      firstFrame: 1
-      lastFrame: 19
+      firstFrame: 21
+      lastFrame: 33
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

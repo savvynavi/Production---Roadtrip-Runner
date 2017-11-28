@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour {
 			print("GROUNDED");
 			isJumping = false;
 		}else if(DistAboveGround(m_nearGroundDistModifier) != null && isJumping == true) {
+            m_animControls.SetTrigger("NearGround");
 			print("INSERT LANDING ANIMATION HERE");
 			m_nearGround = true;
 		}

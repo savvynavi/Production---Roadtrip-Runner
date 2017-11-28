@@ -90,7 +90,7 @@ ModelImporter:
     - serializedVersion: 16
       name: in air
       takeName: Take 001
-      firstFrame: 3.6
+      firstFrame: 8.3
       lastFrame: 29
       wrapMode: 0
       orientationOffsetY: 0
