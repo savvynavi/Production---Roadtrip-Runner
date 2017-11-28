@@ -4,37 +4,40 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
+    public Transform player;
+    public float xPos;
+    public float speed = 5;
 
-    public GameObject player;
-    public Transform pos1;
-    public Transform pos2;
+    public Transform moveTo;
+    public Transform moveFrom;
 
-    public float playerYOrigin = 10;
-    public float playerYMax = 60;
+    public bool playerIsInSky;
 
-    public float percent;
+    private Rigidbody rb;
 
-
-    void Start ()
+    void Start()
     {
-        playerYOrigin = player.transform.position.y;
+        rb = GetComponent<Rigidbody>();
     }
-	
-	void Update ()
+
+    void Update()
     {
         if (player == null) { return; }
 
-        if (player.transform.position.y < 12)
-            playerYMax = 40;
+        moveTo.position = new Vector3(player.position.x - xPos, moveTo.position.y, moveTo.position.z);
+        moveFrom.position = new Vector3(player.position.x - xPos, moveFrom.position.y, moveFrom.position.z);
 
-        pos1.position = new Vector3(player.transform.position.x - 2, pos1.position.y, pos1.position.z);
-        pos2.position = new Vector3(player.transform.position.x - 2, pos2.position.y, pos2.position.z);
+        transform.LookAt(player);
 
-        Vector3 targetPoint = player.transform.position - transform.position;
-        Quaternion targetRotation = Quaternion.LookRotation(targetPoint, Vector3.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 2.0f);
 
-        percent = player.transform.position.y / playerYMax;
-        transform.position = Vector3.Lerp(pos1.position, pos2.position, percent);
+        Vector3 ToDir = (moveTo.position - transform.position).normalized;
+        Vector3 FromDir = (moveFrom.position - transform.position).normalized;
+
+        if (playerIsInSky)
+            rb.MovePosition(transform.position + ToDir * speed * Time.deltaTime);
+        if (!playerIsInSky)
+            rb.MovePosition(transform.position + FromDir * speed * Time.deltaTime);
+
+        transform.position = new Vector3(player.position.x, transform.position.y, transform.position.z);
     }
 }
