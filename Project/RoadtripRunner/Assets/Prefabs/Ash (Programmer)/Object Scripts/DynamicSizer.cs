@@ -6,6 +6,8 @@ public class DynamicSizer : MonoBehaviour
 {
     public Transform firstPoint;
     public Transform secondPoint;
+    public float yPos;
+    public float zPos;
 
 	void Start ()
     {
@@ -16,14 +18,9 @@ public class DynamicSizer : MonoBehaviour
     {
         if (firstPoint == null || secondPoint == null) { return; }
 
-        Vector3 centerPos = transform.position;
-        centerPos.x = firstPoint.position.x + secondPoint.position.x / 2;
+        float scaleMultiplier = Vector3.Distance(firstPoint.position, secondPoint.position) / transform.lossyScale.x;
 
-        transform.position = centerPos;
-
-        float scaleX = Mathf.Abs(firstPoint.position.x - secondPoint.position.x);
-
-        transform.position = centerPos;
-        //transform.localScale = new Vector3(scaleX, 1, 1);
+        transform.position = new Vector3(Mathf.Lerp(firstPoint.position.x, secondPoint.position.x, 0.5f), yPos, zPos);
+        transform.localScale = new Vector3(transform.localScale.x * scaleMultiplier, transform.localScale.y, transform.localScale.z);
     }
 }
