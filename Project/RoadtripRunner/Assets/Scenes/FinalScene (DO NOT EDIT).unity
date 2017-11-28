@@ -1514,6 +1514,11 @@ Prefab:
       propertyPath: zThing
       value: -12.39
       objectReference: {fileID: 0}
+    - target: {fileID: 114191189173514394, guid: 32e5ce55b3ae20040bd1da2caae8f5d3,
+        type: 2}
+      propertyPath: b_isCam
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32e5ce55b3ae20040bd1da2caae8f5d3, type: 2}
   m_IsPrefabParent: 0
