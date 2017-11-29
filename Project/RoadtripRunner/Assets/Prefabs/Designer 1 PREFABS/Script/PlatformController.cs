@@ -20,6 +20,7 @@ public class PlatformController : MonoBehaviour {
 	public Transform startOfPlatform;
 	public Transform endOfPlatform;
 
+    public bool initialized = false;
 
 
 	// Use this for initialization
@@ -46,6 +47,7 @@ public class PlatformController : MonoBehaviour {
 			if(Physics.Raycast(m_activeCamera.position, (m_platformFocalPoint.position - m_activeCamera.position), out hit, Mathf.Infinity ,~layerMask)) {
 				m_platformPos.position = hit.point;
 				Debug.DrawRay(hit.point, (m_platformFocalPoint.position - hit.point), Color.green);
+                initialized = true;
 			}
 		}
 

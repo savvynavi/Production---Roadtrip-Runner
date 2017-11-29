@@ -26,8 +26,12 @@ public class PlayerHealthScript : MonoBehaviour
     {
         if (other.tag == obstacleTag)
         {
-            DamageAndMove(1);
-            bouncing = true;
+            PlatformController pc = other.GetComponent<PlatformController>();
+            if (pc && pc.initialized && Time.time > 3 && other.transform.position.x > transform.position.x) //Used to make sure player does not bounce on game start due to raycasting
+            {
+                DamageAndMove(1);
+                bouncing = true;
+            }
         }
     }
 
